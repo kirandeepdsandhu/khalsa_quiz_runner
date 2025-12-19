@@ -1,0 +1,35 @@
+# OS / editor
+.DS_Store
+Thumbs.db
+Desktop.ini
+*.swp
+*.swo
+.vscode/
+.idea/
+
+# Python
+__pycache__/
+*.py[cod]
+*.pyd
+*.pyo
+*.egg-info/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Virtual envs (if you create one here)
+.venv/
+venv/
+ENV/
+
+# Local dev / logs
+*.log
+
+# Generated / user-edited bank artifacts (keep your canonical banks committed)
+*.edited.json
+*.merged.json
+*.conflicts_report.json
+
+# Audio exports (if you generate them locally)
+*.wav
+*.mp3

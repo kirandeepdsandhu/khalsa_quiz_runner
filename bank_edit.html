@@ -1,0 +1,155 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Question Bank — Edit</title>
+  <link rel="stylesheet" href="./styles.css" />
+  <!-- Optional: smart Punjabi (Gurmukhi) phonetic IME (requires internet). Falls back to built-in keyboard if unavailable. -->
+  <link rel="stylesheet" href="https://unpkg.com/jquery.ime@0.2.0-2/dist/jquery.ime/css/jquery.ime.css" />
+</head>
+<body class="bankPage">
+  <header class="header">
+    <div class="wrap">
+      <div class="titlebar">
+        <div class="brand">
+          <div class="logo" aria-hidden="true"></div>
+          <div>
+            <div class="bankTitleRow">
+              <h1>Question Bank — Edit</h1>
+              <div class="bankTitleActions">
+                <button class="btn" id="btnGoRead" type="button">Read bank</button>
+                <button class="btn" id="btnClearLocal" type="button">Clear local status</button>
+              </div>
+            </div>
+            <div class="sub">One question at a time</div>
+          </div>
+        </div>
+      </div>
+
+      <nav class="tabs" aria-label="Bank tabs">
+        <button class="tab active" data-tab="edit" type="button">Edit</button>
+        <button class="tab" data-tab="index" type="button">Index</button>
+      </nav>
+    </div>
+  </header>
+
+  <main class="main">
+    <section id="tab-edit">
+      <div class="grid">
+        <div class="card">
+        <h2>Bank</h2>
+        <div class="row">
+          <input id="bankFile" type="file" accept="application/json" />
+          <button class="btn primary" id="btnLoadBank" type="button">Load</button>
+          <button class="btn" id="btnLoadDefaultBank" type="button" title="Load the default bank bundled in this repo">Load default</button>
+        </div>
+
+        <div class="row" style="margin-top:10px">
+          <div class="pill" title="Bank status">
+            <span id="bankDot" class="dot no"></span>
+            <span id="bankStatus">Question bank: not loaded</span>
+          </div>
+        </div>
+
+        <div class="sep"></div>
+
+        <h2>Edit</h2>
+        <div class="row">
+          <div class="grow" style="min-width:260px">
+            <label for="editorName">Your name (required to save)</label>
+            <input id="editorName" type="text" placeholder="e.g., Kirandeep" />
+          </div>
+          <div class="row" aria-label="Editor text size">
+            <button class="btn small" id="btnFontMinus" type="button" title="Smaller text">−</button>
+            <span class="badge" id="fontSizeBadge" title="Editable text size">Text</span>
+            <button class="btn small" id="btnFontPlus" type="button" title="Larger text">+</button>
+          </div>
+          <div class="row" aria-label="Gurmukhi input">
+            <button class="btn small" id="btnGkKeyboard" type="button" title="Show/hide Gurmukhi keyboard">Gurmukhi</button>
+            <button class="btn small" id="btnGkPhonetic" type="button" title="Type Gurmukhi using A-Z (phonetic)">Phonetic</button>
+          </div>
+          <button class="btn good" id="btnDownload" type="button" disabled>Download updated JSON</button>
+        </div>
+        <p class="hint">Saving adds an entry to <span class="k">section_updates</span>.</p>
+
+        <div class="sep"></div>
+
+        <h2>Section</h2>
+        <div class="row">
+          <div class="grow" style="min-width:260px">
+            <label for="sectionSelect">Section</label>
+            <select id="sectionSelect" disabled></select>
+          </div>
+          <button class="btn" id="btnAddSection" type="button" disabled>Add section</button>
+          <button class="btn bad" id="btnDeleteSection" type="button" disabled>Delete section</button>
+        </div>
+
+        <div class="sep"></div>
+
+        <h2>Question</h2>
+        <div class="row">
+          <div>
+            <label for="questionJump">Question #</label>
+            <input id="questionJump" type="number" min="1" value="1" disabled />
+          </div>
+          <button class="btn" id="btnJump" type="button" disabled>Go</button>
+          <button class="btn" id="btnPrev" type="button" disabled>Prev</button>
+          <button class="btn" id="btnNext" type="button" disabled>Next</button>
+          <span class="badge" id="qPos">—</span>
+          <span class="badge" id="dirtyBadge">Saved</span>
+        </div>
+
+        <div class="sep"></div>
+
+        <div id="editBox" class="hint">Load a JSON file to start.</div>
+        </div>
+      </div>
+    </section>
+
+    <div id="gkPanel" class="gkPanel hidden" aria-label="Gurmukhi keyboard">
+      <div class="gkHeader">
+        <div class="gkTitle">Gurmukhi keyboard</div>
+        <div class="gkHint">Focus a Punjabi field (…_pa) and tap keys.</div>
+        <button class="btn small" id="btnGkClose" type="button" title="Close">Close</button>
+      </div>
+      <div id="gkKeys" class="gkKeys"></div>
+      <div class="gkBottom">
+        <button class="btn small" id="btnGkBackspace" type="button">Backspace</button>
+        <button class="btn small" id="btnGkSpace" type="button">Space</button>
+        <button class="btn small" id="btnGkEnter" type="button">Enter</button>
+      </div>
+    </div>
+
+    <section id="tab-index" class="hidden">
+      <div class="grid">
+        <div class="card">
+          <h2>Index</h2>
+          <div id="indexBox" class="list"></div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="bankFooter">
+    <div class="wrap">
+      <div class="bankFooterRow">
+        <div class="muted small" id="storageStatus">Local: status/logs</div>
+        <div class="muted small" id="editStatus">Edits: 0</div>
+      </div>
+    </div>
+  </footer>
+
+  <div id="toast" class="toast"></div>
+
+  <!-- Optional IME deps (safe if they fail to load). -->
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
+  <script src="https://unpkg.com/jquery.ime@0.2.0-2/dist/jquery.ime/jquery.ime.min.js"></script>
+  <!-- Load Punjabi IM rules explicitly so it works even if rule auto-loading is blocked. -->
+  <script src="https://unpkg.com/jquery.ime@0.2.0-2/dist/jquery.ime/rules/pa/pa-phonetic.js"></script>
+  <script src="https://unpkg.com/jquery.ime@0.2.0-2/dist/jquery.ime/rules/pa/pa-transliteration.js"></script>
+
+  <script src="./js/bank_common.js"></script>
+  <script src="./js/bank_edit.js"></script>
+</body>
+</html>

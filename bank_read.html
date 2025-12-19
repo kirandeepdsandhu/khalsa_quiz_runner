@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Question Bank — Read</title>
+  <link rel="stylesheet" href="./styles.css" />
+</head>
+<body class="bankPage">
+  <header class="header">
+    <div class="wrap">
+      <div class="titlebar">
+        <div class="brand">
+          <div class="logo" aria-hidden="true"></div>
+          <div>
+            <div class="bankTitleRow">
+              <h1>Question Bank — Read</h1>
+              <div class="bankTitleActions">
+                <button class="btn primary" id="btnGoEdit" type="button" disabled>Edit bank</button>
+                <button class="btn" id="btnClearLocal" type="button">Clear local status</button>
+              </div>
+            </div>
+            <div class="sub">Load JSON • browse sections</div>
+          </div>
+        </div>
+      </div>
+
+      <nav class="tabs" aria-label="Bank tabs">
+        <button class="tab active" data-tab="read" type="button">Read</button>
+        <button class="tab" data-tab="index" type="button">Index</button>
+      </nav>
+    </div>
+  </header>
+
+  <main class="main">
+    <section id="tab-read">
+      <div class="grid">
+        <div class="card">
+        <h2>Bank</h2>
+        <div class="row">
+          <input id="bankFile" type="file" accept="application/json" />
+          <button class="btn primary" id="btnLoadBank" type="button">Load</button>
+          <button class="btn" id="btnLoadDefaultBank" type="button" title="Load the default bank bundled in this repo">Load default</button>
+        </div>
+
+        <div class="row" style="margin-top:10px">
+          <div class="pill" title="Bank status">
+            <span id="bankDot" class="dot no"></span>
+            <span id="bankStatus">Question bank: not loaded</span>
+          </div>
+        </div>
+
+
+        <div class="row" style="margin-top:8px">
+          <div class="grow" style="min-width:260px">
+            <select id="sectionSelect" aria-label="Section" title="Section" disabled></select>
+          </div>
+          <div>
+            <input id="questionJump" aria-label="Question number" title="Question number" type="number" min="1" value="1" disabled />
+          </div>
+          <button class="btn" id="btnJump" type="button" disabled>Go</button>
+          <button class="btn" id="btnPrev" type="button" disabled>Prev</button>
+          <button class="btn" id="btnNext" type="button" disabled>Next</button>
+          <span class="badge" id="qPos">—</span>
+        </div>
+        <div class="row" style="margin-top:6px">
+          <span class="muted small" id="sectionMeta"></span>
+        </div>
+
+        <div class="questionBox" id="readBox">
+          <div class="hint">Load a JSON file to start.</div>
+        </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="tab-index" class="hidden">
+      <div class="grid">
+        <div class="card">
+          <h2>Index</h2>
+          <div id="indexBox" class="list"></div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="bankFooter">
+    <div class="wrap">
+      <div class="bankFooterRow">
+        <div class="muted small" id="storageStatus">Local: status/logs</div>
+      </div>
+    </div>
+  </footer>
+
+  <div id="toast" class="toast"></div>
+
+  <script src="./js/bank_common.js"></script>
+  <script src="./js/bank_read.js"></script>
+</body>
+</html>

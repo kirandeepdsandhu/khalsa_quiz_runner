@@ -1,0 +1,396 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Sikh Quiz — Quiz Runner</title>
+  <link rel="stylesheet" href="./styles.css" />
+</head>
+<body>
+  <header class="header">
+    <div class="wrap">
+      <div class="titlebar">
+        <div class="brand">
+          <div class="logo" aria-hidden="true"></div>
+          <div>
+            <h1>Sikh Quiz — Quiz Runner</h1>
+            <div class="sub">Local UI • teams • rounds • scoring • backup</div>
+          </div>
+        </div>
+
+        <div class="rightbar">
+          <div class="pill" id="bankStatusPill" title="Question bank status">
+            <span id="bankDot" class="dot no"></span>
+            <span id="bankStatus" role="status" aria-live="polite">Question bank: not loaded</span>
+          </div>
+          <div class="pill" title="Auto-save">
+            <span class="dot ok"></span>
+            <span>Auto-save: localStorage</span>
+          </div>
+        </div>
+      </div>
+
+      <nav class="tabs" aria-label="Sections">
+        <button class="tab active" data-tab="setup" type="button">Setup</button>
+        <button class="tab" data-tab="quiz" type="button">Quiz</button>
+        <button class="tab" data-tab="scoreboard" type="button">Scoreboard</button>
+        <button class="tab" data-tab="backup" type="button">Backup/Reset</button>
+      </nav>
+    </div>
+  </header>
+
+  <main class="main">
+    <!-- SETUP -->
+    <section id="tab-setup">
+      <div class="setupCols">
+        <div class="setupCol setupColLeft">
+          <div class="card">
+          <h2>1) Load Question Bank</h2>
+          <div class="row">
+            <input id="bankFile" type="file" accept="application/json" />
+            <button class="btn primary" id="btnLoadBank" type="button">Load</button>
+            <button class="btn" id="btnLoadDefaultBank" type="button" title="Load the default bank bundled in this repo">Load default</button>
+          </div>
+          <p class="hint">
+            Select your JSON file (use the bilingual file like <span class="k">Question_Bank_Sikhi_quiz.v8.corrected.bilingual.en-pa.json</span>).
+            Browsers require you to pick the file explicitly.
+          </p>
+
+          <div class="sep"></div>
+
+          <h2>2) Register Teams</h2>
+          <div class="row">
+            <div class="grow" style="min-width:240px">
+              <label for="teamName">Team name</label>
+              <input id="teamName" type="text" placeholder="e.g., Khalsa Warriors" />
+            </div>
+            <div class="grow" style="min-width:320px">
+              <label for="teamMembers">Members (comma-separated)</label>
+              <input id="teamMembers" type="text" placeholder="e.g., Aman, Simran, Harpreet" />
+            </div>
+            <button class="btn good" id="btnAddTeam" type="button">Add team</button>
+            <button class="btn warn" id="btnResetTeams" type="button">Reset teams</button>
+          </div>
+
+          <div class="list" id="teamList" aria-live="polite"></div>
+          </div>
+
+          <div class="card">
+            <h2>Round Sequence</h2>
+            <div class="hint" style="margin-top:-4px">Saved rounds keep your settings + selected sections. Reorder them here.</div>
+            <div class="list" id="savedRoundsList" aria-live="polite"></div>
+          </div>
+        </div>
+
+        <div class="setupCol setupColRight">
+          <div class="card">
+          <h2>Round Settings</h2>
+          <div class="row">
+            <div style="min-width:260px">
+              <label for="roundName">Round name</label><br />
+              <input id="roundName" type="text" placeholder="e.g., Round 1 (MCQ)" />
+            </div>
+            <div>
+              <label for="roundType">Round type</label><br />
+              <select id="roundType">
+                <option value="normal" selected>Normal (MCQ)</option>
+                <option value="quickfire">Quick Fire (Yes/No)</option>
+                <option value="offline">Offline (manual results)</option>
+              </select>
+            </div>
+            <div>
+              <label for="pointsPerCorrect">Points per correct</label><br />
+              <input id="pointsPerCorrect" type="number" min="1" value="10" />
+            </div>
+            <div>
+              <label for="pointsPerWrong">Points for wrong (negative marking)</label><br />
+              <input id="pointsPerWrong" type="number" value="0" placeholder="-5" />
+            </div>
+            <div>
+              <label for="questionsPerRound">Questions per team (Quick Fire: sets per team)</label><br />
+              <input id="questionsPerRound" type="number" min="1" value="1" />
+            </div>
+            <div>
+              <label for="questionTimeSec">Timer (seconds)</label><br />
+              <input id="questionTimeSec" type="number" min="1" value="30" />
+            </div>
+            <div>
+              <label for="quickFireCount">Quick Fire: questions per turn</label><br />
+              <input id="quickFireCount" type="number" min="2" value="5" />
+            </div>
+
+            <div>
+              <label for="qfAllOrNone">Quick Fire: all or none</label><br />
+              <select id="qfAllOrNone">
+                <option value="yes">Enabled (score only if all correct)</option>
+                <option value="no" selected>Disabled (score per right/wrong)</option>
+              </select>
+            </div>
+            <div>
+              <label for="avoidRepeats">Avoid repeats</label><br />
+              <select id="avoidRepeats" disabled>
+                <option value="yes" selected>Yes (enforced)</option>
+              </select>
+            </div>
+
+            <div>
+              <label for="allowSkip">Skip</label><br />
+              <select id="allowSkip">
+                <option value="yes" selected>Enabled</option>
+                <option value="no">Disabled</option>
+              </select>
+            </div>
+
+            <div>
+              <label for="allowPass">Pass</label><br />
+              <select id="allowPass">
+                <option value="yes" selected>Enabled</option>
+                <option value="no">Disabled</option>
+              </select>
+            </div>
+          </div>
+
+          <div id="offlinePromptBox" class="hidden" style="margin-top:10px">
+            <label for="offlinePrompt">Offline prompt / statement (shown to all teams)</label><br />
+            <textarea id="offlinePrompt" rows="3" style="width:100%" placeholder="Type the question / activity statement here..."></textarea>
+            <div class="hint" style="margin-top:6px">Offline rounds don’t use the question bank. Timer is only for operator convenience.</div>
+          </div>
+
+          <div class="row">
+            <button class="btn" id="btnClearAsked" type="button" disabled>No repeats (history locked)</button>
+            <button class="btn good" id="btnSaveRoundPreset" type="button">Save round</button>
+          </div>
+
+          <div class="sep"></div>
+
+          <h2>Select Sections</h2>
+          <div class="hint" style="margin-top:-6px">Counts show <span class="k">total</span> and <span class="k">available</span> (excluding already used).</div>
+          <div id="sectionsBox" class="hint">Load the question bank to choose sections.</div>
+
+          <div class="sep"></div>
+
+          <h2>Current Round</h2>
+          <div class="row">
+            <span class="badge" id="roundBadge">No active round</span>
+            <span class="muted small" id="roundMeta"></span>
+          </div>
+
+          <p class="hint">
+            Note: the question bank is kept in memory. If you reload the page, just load the bank again.
+          </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- QUIZ -->
+    <section id="tab-quiz" class="hidden">
+      <div class="quizLayout">
+        <div class="card quizMainCard">
+          <h2>Question</h2>
+          <div id="quizEmpty" class="hint">No round in progress.</div>
+
+          <div id="quizNextRoundBox" class="hidden" style="margin-top:12px">
+            <div class="row" style="justify-content:space-between; align-items:center">
+              <div class="hint" style="margin:0">No round in progress.</div>
+              <button class="btn primary" id="btnStartNextRound" type="button">Start next round</button>
+            </div>
+            <div class="muted small" id="quizNextRoundLabel" style="margin-top:8px"></div>
+          </div>
+
+          <div id="quizBox" class="questionBox hidden">
+            <div class="quizRoundHeader">
+              <div class="quizRoundTitle" id="quizRoundTitle"></div>
+              <div class="quizRoundSub" id="quizRoundSub"></div>
+            </div>
+
+            <div class="turnBar" id="turnBar">
+              <div class="turnLeft">
+                <span class="turnLabel">Team</span>
+                <span id="turnTeam" class="teamTag"></span>
+              </div>
+              <div class="turnRight">
+                <div class="timer">
+                  <div class="timerTop">
+                    <div class="timerLabel">Timer</div>
+                    <div class="timerText" id="timerText">00:30</div>
+                  </div>
+                  <div class="timerTrack"><div class="timerFill" id="timerFill"></div></div>
+                </div>
+              </div>
+            </div>
+
+            <div id="preShow" class="preShow hidden">
+              <div class="preCard">
+                <div class="preLabel">Next team</div>
+                <div class="preTeam" id="preTeam"></div>
+                <div class="row" style="justify-content:center; margin-top:56px">
+                  <button class="btn primary" id="btnShow" type="button">Ready</button>
+                </div>
+                <div class="hint" style="margin-top:48px; text-align:center">When the team is ready, press <span class="k">Ready</span> to start the timer.</div>
+              </div>
+            </div>
+
+            <div id="questionContent">
+            <div class="qMain">
+              <div class="qHeader">
+                <div class="qMeta" id="qMeta"></div>
+                <div class="row" style="justify-content:flex-end">
+                  <span class="badge" id="qIndexBadge"></span>
+                  <button class="btn small" id="btnCopyQ" type="button">Copy</button>
+                </div>
+              </div>
+              <div class="qText" id="qText"></div>
+            </div>
+
+            <div class="opts" id="qOptions"></div>
+
+            <div class="selectedInfo" id="selectedInfo"></div>
+
+            <div class="sep optAnswerSep"></div>
+
+            <div class="answer" id="qAnswer">
+              <div class="aLine" id="aLine"></div>
+              <div class="exp" id="aExp"></div>
+            </div>
+
+            <div class="pointsToast" id="pointsToast" aria-live="polite"></div>
+
+            <div class="sep"></div>
+
+            <div class="row actionPanel">
+              <button class="btn primary" id="btnLock" type="button">Submit</button>
+              <button class="btn warn" id="btnSkip" type="button">Skip (0)</button>
+              <button class="btn warn" id="btnPass" type="button">Pass (0)</button>
+              <button class="btn" id="btnReveal" type="button">Reveal now</button>
+              <button class="btn" id="btnUndo" type="button">Undo last</button>
+              <button class="btn primary" id="btnNext" type="button">Next</button>
+            </div>
+
+            <p class="hint">Flow: team selects option → Submit → reveal + score → wait → Next</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="card quizScoreCard">
+          <div class="row" style="justify-content:space-between; align-items:center">
+            <h2 style="margin:0">Live Scoreboard</h2>
+            <button class="btn small" id="btnToggleLiveScore" type="button">Hide scoreboard</button>
+          </div>
+          <div id="quizScoreBody">
+            <div id="liveScore" class="list"></div>
+            <div class="sep"></div>
+            <div class="row">
+              <button class="btn warn" id="btnEndRound" type="button">End round</button>
+            </div>
+            <p class="hint">Teams take turns automatically; colors indicate whose turn it is.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SCOREBOARD -->
+    <section id="tab-scoreboard" class="hidden">
+      <div class="grid">
+        <div class="card">
+          <h2>Teams (Total)</h2>
+          <div id="scoreboardStaleBar" class="row" style="justify-content:space-between; align-items:center">
+            <div class="hint" id="scoreboardStaleText">Round in progress — scoreboard may be outdated.</div>
+            <div class="row" style="gap:8px; justify-content:flex-end">
+              <button class="btn small" id="btnGoQuiz" type="button">Go to Quiz</button>
+              <button class="btn warn small" id="btnScoreboardRefresh" type="button">Update scoreboard</button>
+              <button class="btn small hidden" id="btnTestScoreAnim" type="button">Test animation</button>
+            </div>
+          </div>
+          <div id="scoreboardList" class="list"></div>
+        </div>
+        <div class="card">
+          <h2>Rounds</h2>
+          <div id="roundsList" class="list"></div>
+          <div class="sep"></div>
+          <p class="hint">Use <span class="k">Backup/Reset</span> tab for resets.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- BACKUP -->
+    <section id="tab-backup" class="hidden">
+      <div class="grid">
+        <div class="card">
+          <h2>Reset</h2>
+
+          <h3 style="margin:0 0 10px 0">1) Round level</h3>
+          <div class="row">
+            <div class="grow" style="min-width:260px">
+              <label for="resetRoundSelect">Select round</label>
+              <select id="resetRoundSelect"></select>
+            </div>
+            <button class="btn warn" id="btnResetRoundScores" type="button">Clear this round’s scores</button>
+          </div>
+          <p class="hint">Clears the selected round’s contribution from the total scoreboard (round record stays in the list).</p>
+
+          <div class="sep"></div>
+
+          <h3 style="margin:0 0 10px 0">2) Quiz level</h3>
+          <div class="row">
+            <button class="btn warn" id="btnResetQuizScores" type="button">Clear scores for all rounds</button>
+          </div>
+          <p class="hint">Clears score contributions across all rounds (teams and rounds remain).</p>
+
+          <div class="sep"></div>
+
+          <h3 style="margin:0 0 10px 0">3) Question history</h3>
+          <div class="row">
+            <button class="btn warn" id="btnResetAskedHistory" type="button">Clear asked-question history</button>
+          </div>
+          <p class="hint">Allows repeats again by clearing the “already used” question list.</p>
+
+          <div class="sep"></div>
+
+          <h3 style="margin:0 0 10px 0">4) Everything</h3>
+          <div class="row">
+            <button class="btn warn" id="btnResetAllBackup" type="button">Reset EVERYTHING</button>
+          </div>
+          <p class="hint">Resets teams, rounds, scores, and asked-history (does not touch your bank file).</p>
+        </div>
+
+        <div class="card">
+          <h2>Export State (recommended)</h2>
+          <div class="row">
+            <button class="btn primary" id="btnExport" type="button">Export JSON (download)</button>
+            <button class="btn" id="btnCopyState" type="button">Copy JSON</button>
+          </div>
+
+          <div class="sep"></div>
+
+          <h2>Import State</h2>
+          <div class="row">
+            <input id="importFile" type="file" accept="application/json" />
+            <button class="btn warn" id="btnImport" type="button">Import</button>
+          </div>
+          <p class="hint">Import overwrites current state. You may need to reload the question bank after importing.</p>
+        </div>
+
+        <div class="card">
+          <h2>Raw State (read-only)</h2>
+          <textarea id="statePreview" readonly></textarea>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <div class="resultOverlay" id="resultOverlay" aria-live="polite" aria-atomic="true"></div>
+
+  <div class="floatingNav" aria-label="Quick navigation">
+    <button class="btn small" id="btnToggleRibbon" type="button">Hide top</button>
+    <button class="btn small" id="btnQuickQuiz" type="button">Quiz</button>
+    <button class="btn small" id="btnQuickScoreboard" type="button">Scoreboard</button>
+  </div>
+
+  <script src="./js/app.01_core.js"></script>
+  <script src="./js/app.02_setup_rounds.js"></script>
+  <script src="./js/app.03_quiz.js"></script>
+  <script src="./js/app.04_scoreboard_backup_boot.js"></script>
+</body>
+</html>
