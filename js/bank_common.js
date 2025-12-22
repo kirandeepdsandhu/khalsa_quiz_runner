@@ -9,6 +9,8 @@
 
 const QB_STATUS_KEY = "qb_status_v1"; // {fileName,lastLoadedAt,lastEditedAt,editsCount,sectionsCount,questionsCount}
 const QB_INDEX_KEY = "qb_index_v1"; // { files: { [fileName]: { sections: { [sectionId]: {title, addedAt?, deletedAt?, questions: { [questionId]: { number?, readAt?, editedAt? } } } }, deleted: [{id,title,at}] } } }
+const QB_EDITS_KEY = "qb_edits_v1"; // { files: { [fileName]: { sections: { [sectionId]: { questions: { [questionId]: { editedQuestion } } } } } } }
+const QB_ORIGINALS_KEY = "qb_originals_v1"; // { files: { [fileName]: { sections: { [sectionId]: { questions: { [questionId]: { originalQuestion } } } } } } }
 const QB_WINDOW_NAME_PREFIX = "qb_bank_payload_v1:";
 
 const $ = (sel) => document.querySelector(sel);
@@ -175,6 +177,129 @@ function appendEditLog(entry, maxItems = 200) {
 function clearLocalInfo() {
   try { localStorage.removeItem(QB_STATUS_KEY); } catch {}
   try { localStorage.removeItem(QB_INDEX_KEY); } catch {}
+  try { localStorage.removeItem(QB_EDITS_KEY); } catch {}
+  try { localStorage.removeItem(QB_ORIGINALS_KEY); } catch {}
+}
+
+function readEdits() {
+  try {
+    const raw = localStorage.getItem(QB_EDITS_KEY);
+    const parsed = raw ? JSON.parse(raw) : null;
+    if (!parsed || typeof parsed !== "object") return { files: {} };
+    if (!parsed.files || typeof parsed.files !== "object") parsed.files = {};
+    return parsed;
+  } catch {
+    return { files: {} };
+  }
+}
+
+function writeEdits(editsObj) {
+  try {
+    localStorage.setItem(QB_EDITS_KEY, JSON.stringify(editsObj));
+  } catch (err) {
+    console.warn("Failed to save edits to localStorage", err);
+  }
+}
+
+function readOriginals() {
+  try {
+    const raw = localStorage.getItem(QB_ORIGINALS_KEY);
+    const parsed = raw ? JSON.parse(raw) : null;
+    if (!parsed || typeof parsed !== "object") return { files: {} };
+    if (!parsed.files || typeof parsed.files !== "object") parsed.files = {};
+    return parsed;
+  } catch {
+    return { files: {} };
+  }
+}
+
+function writeOriginals(originalsObj) {
+  try {
+    localStorage.setItem(QB_ORIGINALS_KEY, JSON.stringify(originalsObj));
+  } catch (err) {
+    console.warn("Failed to save originals to localStorage", err);
+  }
+}
+
+function saveOriginalQuestion(fileName, sectionId, questionId, originalQuestion) {
+  const originals = readOriginals();
+  const fn = safeText(fileName || "question_bank.json") || "question_bank.json";
+  if (!originals.files[fn]) originals.files[fn] = { sections: {} };
+  if (!originals.files[fn].sections[sectionId]) originals.files[fn].sections[sectionId] = { questions: {} };
+  // Only save if not already saved (preserve the original)
+  if (!originals.files[fn].sections[sectionId].questions[questionId]) {
+    originals.files[fn].sections[sectionId].questions[questionId] = cloneDeep(originalQuestion);
+    writeOriginals(originals);
+  }
+}
+
+function getOriginalQuestion(fileName, sectionId, questionId) {
+  const originals = readOriginals();
+  const fn = safeText(fileName || "question_bank.json") || "question_bank.json";
+  return originals?.files?.[fn]?.sections?.[sectionId]?.questions?.[questionId] || null;
+}
+
+function saveQuestionEdit(fileName, sectionId, questionId, editedQuestion) {
+  const edits = readEdits();
+  const fn = safeText(fileName || "question_bank.json") || "question_bank.json";
+  if (!edits.files[fn]) edits.files[fn] = { sections: {} };
+  if (!edits.files[fn].sections[sectionId]) edits.files[fn].sections[sectionId] = { questions: {} };
+  edits.files[fn].sections[sectionId].questions[questionId] = cloneDeep(editedQuestion);
+  writeEdits(edits);
+}
+
+function getPersistedEdit(fileName, sectionId, questionId) {
+  const edits = readEdits();
+  const fn = safeText(fileName || "question_bank.json") || "question_bank.json";
+  return edits?.files?.[fn]?.sections?.[sectionId]?.questions?.[questionId] || null;
+}
+
+function clearQuestionEdit(fileName, sectionId, questionId) {
+  const edits = readEdits();
+  const fn = safeText(fileName || "question_bank.json") || "question_bank.json";
+  if (edits?.files?.[fn]?.sections?.[sectionId]?.questions?.[questionId]) {
+    delete edits.files[fn].sections[sectionId].questions[questionId];
+    writeEdits(edits);
+    return true;
+  }
+  return false;
+}
+
+function clearSectionEdits(fileName, sectionId) {
+  const edits = readEdits();
+  const fn = safeText(fileName || "question_bank.json") || "question_bank.json";
+  if (edits?.files?.[fn]?.sections?.[sectionId]) {
+    delete edits.files[fn].sections[sectionId];
+    writeEdits(edits);
+    return true;
+  }
+  return false;
+}
+
+function applyPersistedEditsToBank(fileName, bankJson) {
+  const edits = readEdits();
+  const fn = safeText(fileName || "question_bank.json") || "question_bank.json";
+  const fileEdits = edits?.files?.[fn];
+  if (!fileEdits || !bankJson?.sections) return;
+
+  for (const sec of bankJson.sections) {
+    const sid = makeSectionId(sec.title);
+    const sectionEdits = fileEdits.sections?.[sid];
+    if (!sectionEdits?.questions) continue;
+
+    if (Array.isArray(sec.questions)) {
+      sec.questions.forEach((q, qi) => {
+        const qid = makeQuestionId(q, qi);
+        const editedQ = sectionEdits.questions[qid];
+        if (editedQ) {
+          // Save original before applying edits (only if not already saved)
+          saveOriginalQuestion(fileName, sid, qid, q);
+          // Apply persisted edits to this question
+          Object.assign(q, cloneDeep(editedQ));
+        }
+      });
+    }
+  }
 }
 
 function normalizeKey(s) {

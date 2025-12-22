@@ -21,6 +21,9 @@ function applyLoadedBank(json, fileName) {
   bankFileName = fileName || "question_bank.json";
   ensureSectionUpdates(bank);
 
+  // Apply any persisted edits from localStorage
+  applyPersistedEditsToBank(bankFileName, bank);
+
   syncIndexWithBank(bankFileName, bank);
 
   writeBankToWindowName(bank, bankFileName);
@@ -440,26 +443,31 @@ function renderIndex() {
     if (entry.deletedAt) secPills.push('<span class="pill bad">Deleted</span>');
 
     const openAttr = i === sectionIdx ? " open" : "";
+    const clearSectionBtn = editedCount > 0 ? `<button class="btn small bad" data-clear-sec="${i}" type="button" style="margin-left:8px">Clear Section Edits</button>` : "";
     const summaryRight = [
       editedCount ? `<span class="pill warn">Edited ${editedCount}/${count}</span>` : "",
       readCount ? `<span class="pill">Read ${readCount}/${count}</span>` : "",
-      ...secPills
+      ...secPills,
+      clearSectionBtn
     ].filter(Boolean).join(" ");
 
     const qRows = sec.questions.map((q, qi) => {
       const qid = makeQuestionId(q, qi);
       const qe = qs[qid] || {};
       const qp = [];
-      if (qe.editedAt) qp.push('<span class="pill warn">Edited</span>');
+      if (qe.editedAt) {
+        qp.push('<span class="pill warn">Edited</span>');
+        qp.push(`<button class="btn small bad" data-clear-q="${i},${qi}" type="button" style="margin-left:6px">Clear Edit</button>`);
+      }
       if (qe.readAt) qp.push('<span class="pill">Read</span>');
 
       const n = safeText(q?.number).trim();
       const label = n ? `Q${escapeHtml(n)}` : `Q${qi + 1}`;
       const qt = normalizeBilingual(q?.question);
       const snippet = escapeHtml((qt.en || qt.pa || "").trim().slice(0, 70));
-      return `<div class="row indexRow" role="button" tabindex="0" data-sec="${i}" data-q="${qi}" style="padding:6px 0">
-        <div class="grow"><span class="k">${label}</span> <span class="hint">${snippet}</span></div>
-        <div class="right">${qp.join(" ")}</div>
+      return `<div class="row indexRow" style="padding:6px 0; align-items:center">
+        <div class="grow" role="button" tabindex="0" data-sec="${i}" data-q="${qi}" style="cursor:pointer"><span class="k">${label}</span> <span class="hint">${snippet}</span></div>
+        <div class="right" style="display:flex; gap:6px; align-items:center">${qp.join(" ")}</div>
       </div>`;
     }).join("");
 
@@ -507,7 +515,31 @@ function setupIndexClicks() {
     setActiveTab("edit");
   };
 
-  box.addEventListener("click", (e) => activate(e.target));
+  box.addEventListener("click", (e) => {
+    // Handle Clear Edit button for questions
+    const clearQBtn = e.target?.closest?.("[data-clear-q]");
+    if (clearQBtn) {
+      e.stopPropagation();
+      const [s, q] = clearQBtn.dataset.clearQ.split(",").map(v => parseInt(v, 10));
+      if (!Number.isFinite(s) || !Number.isFinite(q)) return;
+      clearQuestionEditHandler(s, q);
+      return;
+    }
+
+    // Handle Clear Section Edits button
+    const clearSecBtn = e.target?.closest?.("[data-clear-sec]");
+    if (clearSecBtn) {
+      e.stopPropagation();
+      const s = parseInt(clearSecBtn.dataset.clearSec, 10);
+      if (!Number.isFinite(s)) return;
+      clearSectionEditsHandler(s);
+      return;
+    }
+
+    // Handle navigation to question
+    activate(e.target);
+  });
+
   box.addEventListener("keydown", (e) => {
     if (e.key !== "Enter" && e.key !== " ") return;
     const row = e.target?.closest?.("[data-sec][data-q]");
@@ -583,11 +615,6 @@ function renderEditForm() {
 
   $("#qPos").textContent = `Q ${qIdx + 1} / ${count}`;
 
-  const jump = $("#questionJump");
-  jump.min = 1;
-  jump.max = Math.max(1, count);
-  jump.value = String(qIdx + 1);
-
   const qText = normalizeBilingual(q.question);
   const eText = normalizeBilingual(q.explanation);
 
@@ -662,6 +689,17 @@ function renderEditForm() {
 
     <div class="row" style="margin-top:14px">
       <button class="btn good" id="btnSaveQuestion" type="button">Save this question</button>
+      <button class="btn" id="btnLoadOriginal" type="button">Reset</button>
+    </div>
+
+    <div class="row" style="margin-top:10px">
+      <button class="btn" id="btnPrevInForm" type="button">Prev</button>
+      <button class="btn" id="btnNextInForm" type="button">Next</button>
+      <div style="min-width:80px">
+        <input id="questionJumpInForm" type="number" min="1" value="1" style="width:60px" />
+      </div>
+      <button class="btn" id="btnJumpInForm" type="button">Go</button>
+      <span class="badge" id="qPosInForm">Q ${qIdx + 1} / ${count}</span>
       <span class="muted small" id="dirtyHint"></span>
     </div>
   `;
@@ -669,6 +707,35 @@ function renderEditForm() {
   box.appendChild(form);
 
   $("#btnSaveQuestion").addEventListener("click", () => saveQuestionEdits());
+  $("#btnLoadOriginal").addEventListener("click", () => loadOriginalQuestion());
+
+  // Navigation buttons in form
+  $("#btnPrevInForm").addEventListener("click", () => {
+    qIdx = Math.max(0, qIdx - 1);
+    renderEditForm();
+  });
+  $("#btnNextInForm").addEventListener("click", () => {
+    const sec = bank.sections[sectionIdx];
+    qIdx = Math.min(sec.questions.length - 1, qIdx + 1);
+    renderEditForm();
+  });
+  $("#btnJumpInForm").addEventListener("click", () => {
+    const v = parseInt($("#questionJumpInForm").value, 10);
+    if (!Number.isFinite(v)) return;
+    const sec = bank.sections[sectionIdx];
+    const found = findQuestionIndexByNumber(sec, v);
+    qIdx = found >= 0 ? found : Math.max(0, v - 1);
+    renderEditForm();
+  });
+
+  // Sync the main question jump input
+  const jump = $("#questionJump");
+  jump.min = 1;
+  jump.max = Math.max(1, count);
+  jump.value = String(qIdx + 1);
+  $("#questionJumpInForm").min = 1;
+  $("#questionJumpInForm").max = Math.max(1, count);
+  $("#questionJumpInForm").value = String(qIdx + 1);
 
   // Dirty tracking
   const dirtyEls = [
@@ -752,6 +819,12 @@ function saveQuestionEdits() {
   };
   bank.section_updates.push(updateEntry);
 
+  // Save original before first edit, persist edited question to localStorage
+  const sid = makeSectionId(sec.title);
+  const qid = makeQuestionId(q, qIdx);
+  saveOriginalQuestion(bankFileName, sid, qid, before);
+  saveQuestionEdit(bankFileName, sid, qid, q);
+
   // Keep the latest full bank only in this tab, not localStorage.
   writeBankToWindowName(bank, bankFileName);
 
@@ -768,6 +841,131 @@ function saveQuestionEdits() {
   setDirty(false);
   refreshStatus();
   toast("Saved.");
+}
+
+function loadOriginalQuestion() {
+  const sec = bank.sections[sectionIdx];
+  const q = sec?.questions?.[qIdx];
+  if (!q) return;
+
+  const sid = makeSectionId(sec.title);
+  const qid = makeQuestionId(q, qIdx);
+  const original = getOriginalQuestion(bankFileName, sid, qid);
+
+  if (!original) {
+    toast("No original version found for this question.");
+    return;
+  }
+
+  if (!confirm("Load the original version of this question? Current unsaved changes will be lost.")) {
+    return;
+  }
+
+  // Restore original to the bank
+  Object.assign(q, cloneDeep(original));
+
+  // Clear the persisted edit
+  clearQuestionEdit(bankFileName, sid, qid);
+
+  // Update the index to remove edited status
+  markQuestionStatus(bankFileName, sec.title, q, qIdx, { editedAt: null });
+
+  // Update in-memory bank
+  writeBankToWindowName(bank, bankFileName);
+
+  // Re-render
+  renderEditForm();
+  renderIndex();
+  refreshStatus();
+  toast("Original question loaded.");
+}
+
+function clearQuestionEditHandler(secIdx, qiIdx) {
+  if (!bank) return;
+
+  const sec = bank.sections[secIdx];
+  if (!sec) return;
+
+  const q = sec.questions[qiIdx];
+  if (!q) return;
+
+  const sid = makeSectionId(sec.title);
+  const qid = makeQuestionId(q, qiIdx);
+  const original = getOriginalQuestion(bankFileName, sid, qid);
+
+  if (!original) {
+    toast("No original version found for this question.");
+    return;
+  }
+
+  if (!confirm("Clear edits and restore original for this question?")) {
+    return;
+  }
+
+  // Restore original to the bank
+  Object.assign(q, cloneDeep(original));
+
+  // Clear the persisted edit
+  clearQuestionEdit(bankFileName, sid, qid);
+
+  // Update the index to remove edited status
+  markQuestionStatus(bankFileName, sec.title, q, qiIdx, { editedAt: null });
+
+  // Update in-memory bank
+  writeBankToWindowName(bank, bankFileName);
+
+  // Re-render if we're on this question
+  if (secIdx === sectionIdx && qiIdx === qIdx) {
+    renderEditForm();
+  }
+
+  renderIndex();
+  refreshStatus();
+  toast("Question edits cleared.");
+}
+
+function clearSectionEditsHandler(secIdx) {
+  if (!bank) return;
+
+  const sec = bank.sections[secIdx];
+  if (!sec) return;
+
+  const sid = makeSectionId(sec.title);
+  const title = getSectionTitleDisplay(sec.title);
+
+  if (!confirm(`Clear all edits for section "${title}"? This will restore all questions in this section to their original versions.`)) {
+    return;
+  }
+
+  let clearedCount = 0;
+  sec.questions.forEach((q, qi) => {
+    const qid = makeQuestionId(q, qi);
+    const original = getOriginalQuestion(bankFileName, sid, qid);
+    if (original) {
+      // Restore original to the bank
+      Object.assign(q, cloneDeep(original));
+      // Clear the persisted edit
+      clearQuestionEdit(bankFileName, sid, qid);
+      // Update the index to remove edited status
+      markQuestionStatus(bankFileName, sec.title, q, qi, { editedAt: null });
+      clearedCount++;
+    }
+  });
+
+  // Clear section-level edits too
+  clearSectionEdits(bankFileName, sid);
+
+  // Update in-memory bank
+  writeBankToWindowName(bank, bankFileName);
+
+  // Re-render if we're in this section
+  if (secIdx === sectionIdx) {
+    renderEditForm();
+  }
+
+  renderIndex();
+  refreshStatus();
+  toast(`Cleared ${clearedCount} question edits in section.`);
 }
 
 function onSectionChange() {
