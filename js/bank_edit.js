@@ -466,8 +466,8 @@ function renderIndex() {
       const qt = normalizeBilingual(q?.question);
       const snippet = escapeHtml((qt.en || qt.pa || "").trim().slice(0, 70));
       return `<div class="row indexRow" style="padding:6px 0; align-items:center">
-        <div class="grow" role="button" tabindex="0" data-sec="${i}" data-q="${qi}" style="cursor:pointer"><span class="k">${label}</span> <span class="hint">${snippet}</span></div>
-        <div class="right" style="display:flex; gap:6px; align-items:center">${qp.join(" ")}</div>
+        <div class="grow" data-sec="${i}" data-q="${qi}" style="cursor:pointer; padding:8px 0"><span class="k">${label}</span> <span class="hint">${snippet}</span></div>
+        <div class="right" style="display:flex; gap:6px; align-items:center; flex-shrink:0">${qp.join(" ")}</div>
       </div>`;
     }).join("");
 
@@ -520,6 +520,7 @@ function setupIndexClicks() {
     const clearQBtn = e.target?.closest?.("[data-clear-q]");
     if (clearQBtn) {
       e.stopPropagation();
+      e.preventDefault();
       const [s, q] = clearQBtn.dataset.clearQ.split(",").map(v => parseInt(v, 10));
       if (!Number.isFinite(s) || !Number.isFinite(q)) return;
       clearQuestionEditHandler(s, q);
@@ -530,14 +531,32 @@ function setupIndexClicks() {
     const clearSecBtn = e.target?.closest?.("[data-clear-sec]");
     if (clearSecBtn) {
       e.stopPropagation();
+      e.preventDefault();
       const s = parseInt(clearSecBtn.dataset.clearSec, 10);
       if (!Number.isFinite(s)) return;
       clearSectionEditsHandler(s);
       return;
     }
 
+    // Handle navigation to question - check if we clicked on a button first
+    if (e.target.closest("button")) return;
+
     // Handle navigation to question
-    activate(e.target);
+    const navTarget = e.target?.closest?.("[data-sec][data-q]");
+    if (navTarget) {
+      e.preventDefault();
+      const s = parseInt(navTarget.dataset.sec, 10);
+      const q = parseInt(navTarget.dataset.q, 10);
+      if (!Number.isFinite(s) || !Number.isFinite(q) || !bank) return;
+      sectionIdx = Math.max(0, Math.min(s, Math.max(0, bank.sections.length - 1)));
+      const sec = bank.sections[sectionIdx];
+      const maxQ = Math.max(0, (sec?.questions?.length || 0) - 1);
+      qIdx = Math.max(0, Math.min(q, maxQ));
+      renderSectionSelect();
+      renderEditForm();
+      refreshStatus();
+      setActiveTab("edit");
+    }
   });
 
   box.addEventListener("keydown", (e) => {
