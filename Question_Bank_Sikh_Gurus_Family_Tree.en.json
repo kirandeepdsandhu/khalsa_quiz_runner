@@ -1,0 +1,849 @@
+{
+  "meta": {
+    "title": "Sikh Gurus Family Tree Quiz Bank (English)",
+    "description": "Quiz questions based on the Sikh Gurus family tree, covering dates, places, family relations, and succession.",
+    "language": "en"
+  },
+  "sections": [
+    {
+      "id": "dates_and_birth_places",
+      "title": "Dates and Birth Places",
+      "questions": [
+        {
+          "number": 1,
+          "question": {"en": "When was Guru Nanak Dev Ji born?"},
+          "options": {
+            "a": {"en": "1469-10-29"},
+            "b": {"en": "1504-04-25"},
+            "c": {"en": "1534-10-04"},
+            "d": {"en": "1563-04-25"}
+          },
+          "correct_option": "a",
+          "answer_text": {"en": "1469-10-29"}
+        },
+        {
+          "number": 2,
+          "question": {"en": "Where was Guru Nanak Dev Ji born?"},
+          "options": {
+            "a": {"en": "Rai Bhoi Ki Talwandi (present-day Nankana Sahib, Punjab, Pakistan)"},
+            "b": {"en": "Kiratpur Sahib, Punjab, India"},
+            "c": {"en": "Chuna Mandi, Lahore, Punjab, Pakistan"},
+            "d": {"en": "Patna Sahib, Bihar, India"}
+          },
+          "correct_option": "a",
+          "answer_text": {"en": "Rai Bhoi Ki Talwandi (present-day Nankana Sahib, Punjab, Pakistan)"}
+        },
+        {
+          "number": 3,
+          "question": {"en": "When did Guru Angad Dev Ji become Guru?"},
+          "options": {
+            "a": {"en": "1539-09-13"},
+            "b": {"en": "1552-04-05"},
+            "c": {"en": "1581-09-10"},
+            "d": {"en": "1606-05-29"}
+          },
+          "correct_option": "a",
+          "answer_text": {"en": "1539-09-13"}
+        },
+        {
+          "number": 4,
+          "question": {"en": "When did Guru Amar Das Ji pass away?"},
+          "options": {
+            "a": {"en": "1574-09-11"},
+            "b": {"en": "1552-04-08"},
+            "c": {"en": "1581-09-11"},
+            "d": {"en": "1606-06-09"}
+          },
+          "correct_option": "a",
+          "answer_text": {"en": "1574-09-11"}
+        },
+        {
+          "number": 5,
+          "question": {"en": "Where was Guru Ramdas Ji born?"},
+          "options": {
+            "a": {"en": "Chuna Mandi, Lahore, Punjab, Pakistan"},
+            "b": {"en": "Goindval, Tarn Taran, Punjab, India"},
+            "c": {"en": "Basarke, Amritsar, Punjab, India"},
+            "d": {"en": "Amritsar, Punjab, India"}
+          },
+          "correct_option": "a",
+          "answer_text": {"en": "Chuna Mandi, Lahore, Punjab, Pakistan"}
+        },
+        {
+          "number": 6,
+          "question": {"en": "When was Guru Arjan Dev Ji born?"},
+          "options": {
+            "a": {"en": "1563-04-25"},
+            "b": {"en": "1595-06-22"},
+            "c": {"en": "1621-04-11"},
+            "d": {"en": "1667-01-01"}
+          },
+          "correct_option": "a",
+          "answer_text": {"en": "1563-04-25"}
+        },
+        {
+          "number": 7,
+          "question": {"en": "When did Guru Hargobind Sahib Ji become Guru?"},
+          "options": {
+            "a": {"en": "1606-05-29"},
+            "b": {"en": "1581-09-10"},
+            "c": {"en": "1644-03-06"},
+            "d": {"en": "1664-04-09"}
+          },
+          "correct_option": "a",
+          "answer_text": {"en": "1606-05-29"}
+        },
+        {
+          "number": 8,
+          "question": {"en": "Where was Guru Har Rai Ji born?"},
+          "options": {
+            "a": {"en": "Kiratpur Sahib, Rupnagar (Ropar), Punjab, India"},
+            "b": {"en": "Patna Sahib, Bihar, India"},
+            "c": {"en": "Goindval, Tarn Taran, Punjab, India"},
+            "d": {"en": "Chuna Mandi, Lahore, Punjab, Pakistan"}
+          },
+          "correct_option": "a",
+          "answer_text": {"en": "Kiratpur Sahib, Rupnagar (Ropar), Punjab, India"}
+        },
+        {
+          "number": 9,
+          "question": {"en": "When was Guru Tegh Bahadur Ji born?"},
+          "options": {
+            "a": {"en": "1621-04-11"},
+            "b": {"en": "1595-06-22"},
+            "c": {"en": "1667-01-01"},
+            "d": {"en": "1630-01-26"}
+          },
+          "correct_option": "a",
+          "answer_text": {"en": "1621-04-11"}
+        },
+        {
+          "number": 10,
+          "question": {"en": "Where was Guru Gobind Singh Ji born?"},
+          "options": {
+            "a": {"en": "Patna Sahib (Patna), Bihar, India"},
+            "b": {"en": "Kiratpur Sahib, Punjab, India"},
+            "c": {"en": "Amritsar, Punjab, India"},
+            "d": {"en": "Goindval, Tarn Taran, Punjab, India"}
+          },
+          "correct_option": "a",
+          "answer_text": {"en": "Patna Sahib (Patna), Bihar, India"}
+        },
+        {
+          "number": 11,
+          "question": {"en": "When did Guru Ramdas Ji pass away?"},
+          "options": {
+            "a": {"en": "1581-09-11"},
+            "b": {"en": "1574-09-11"},
+            "c": {"en": "1606-06-09"},
+            "d": {"en": "1539-09-17"}
+          },
+          "correct_option": "a",
+          "answer_text": {"en": "1581-09-11"}
+        },
+        {
+          "number": 12,
+          "question": {"en": "When did Guru Hargobind Sahib Ji pass away?"},
+          "options": {
+            "a": {"en": "1644-03-13"},
+            "b": {"en": "1661-10-16"},
+            "c": {"en": "1675-11-21"},
+            "d": {"en": "1708-10-18"}
+          },
+          "correct_option": "a",
+          "answer_text": {"en": "1644-03-13"}
+        },
+        {
+          "number": 13,
+          "question": {"en": "When did Guru Har Rai Ji become Guru?"},
+          "options": {
+            "a": {"en": "1644-03-06"},
+            "b": {"en": "1606-05-29"},
+            "c": {"en": "1664-04-09"},
+            "d": {"en": "1675-11-19"}
+          },
+          "correct_option": "a",
+          "answer_text": {"en": "1644-03-06"}
+        },
+        {
+          "number": 14,
+          "question": {"en": "When did Guru Har Krishan Ji pass away?"},
+          "options": {
+            "a": {"en": "1664-04-09"},
+            "b": {"en": "1675-11-21"},
+            "c": {"en": "1708-10-18"},
+            "d": {"en": "1644-03-13"}
+          },
+          "correct_option": "a",
+          "answer_text": {"en": "1664-04-09"}
+        }
+      ]
+    },
+    {
+      "id": "parents_and_siblings",
+      "title": "Parents and Siblings",
+      "questions": [
+        {
+          "number": 1,
+          "question": {"en": "Who was the father of Guru Nanak Dev Ji?"},
+          "options": {
+            "a": {"en": "Mehta Kalu Ji"},
+            "b": {"en": "Baba Pheru Mal Ji"},
+            "c": {"en": "Hari Das Ji"},
+            "d": {"en": "Guru Arjan Dev Ji"}
+          },
+          "correct_option": "a",
+          "answer_text": {"en": "Mehta Kalu Ji"}
+        },
+        {
+          "number": 2,
+          "question": {"en": "Who was the mother of Guru Nanak Dev Ji?"},
+          "options": {
+            "a": {"en": "Mata Tripta Ji"},
+            "b": {"en": "Mata Ramo Ji"},
+            "c": {"en": "Mata Daya Devi Ji"},
+            "d": {"en": "Mata Gujri Ji"}
+          },
+          "correct_option": "a",
+          "answer_text": {"en": "Mata Tripta Ji"}
+        },
+        {
+          "number": 3,
+          "question": {"en": "Name the siblings of Guru Nanak Dev Ji."},
+          "options": {
+            "a": {"en": "Bebe Nanaki Ji"},
+            "b": {"en": "Prithi Chand"},
+            "c": {"en": "None"},
+            "d": {"en": "Bibi Bhani Ji"}
+          },
+          "correct_option": "a",
+          "answer_text": {"en": "Bebe Nanaki Ji"}
+        },
+        {
+          "number": 4,
+          "question": {"en": "Who was the father of Guru Angad Dev Ji?"},
+          "options": {
+            "a": {"en": "Baba Pheru Mal Ji"},
+            "b": {"en": "Mehta Kalu Ji"},
+            "c": {"en": "Tej Bhan Ji"},
+            "d": {"en": "Guru Hargobind Sahib Ji"}
+          },
+          "correct_option": "a",
+          "answer_text": {"en": "Baba Pheru Mal Ji"}
+        },
+        {
+          "number": 5,
+          "question": {"en": "Who was the mother of Guru Angad Dev Ji?"},
+          "options": {
+            "a": {"en": "Mata Ramo Ji"},
+            "b": {"en": "Mata Tripta Ji"},
+            "c": {"en": "Mata Daya Devi Ji"},
+            "d": {"en": "Mata Gujri Ji"}
+          },
+          "correct_option": "a",
+          "answer_text": {"en": "Mata Ramo Ji"}
+        },
+        {
+          "number": 6,
+          "question": {"en": "Name the siblings of Guru Amar Das Ji."},
+          "options": {
+            "a": {"en": "None"},
+            "b": {"en": "Bebe Nanaki Ji"},
+            "c": {"en": "Prithi Chand"},
+            "d": {"en": "Bibi Bhani Ji"}
+          },
+          "correct_option": "a",
+          "answer_text": {"en": "None"}
+        },
+        {
+          "number": 7,
+          "question": {"en": "Who was the father of Guru Ramdas Ji?"},
+          "options": {
+            "a": {"en": "Hari Das Ji"},
+            "b": {"en": "Mehta Kalu Ji"},
+            "c": {"en": "Baba Pheru Mal Ji"},
+            "d": {"en": "Guru Arjan Dev Ji"}
+          },
+          "correct_option": "a",
+          "answer_text": {"en": "Hari Das Ji"}
+        },
+        {
+          "number": 8,
+          "question": {"en": "Who was the mother of Guru Ramdas Ji?"},
+          "options": {
+            "a": {"en": "Mata Daya Devi Ji"},
+            "b": {"en": "Mata Tripta Ji"},
+            "c": {"en": "Mata Ramo Ji"},
+            "d": {"en": "Mata Gujri Ji"}
+          },
+          "correct_option": "a",
+          "answer_text": {"en": "Mata Daya Devi Ji"}
+        },
+        {
+          "number": 9,
+          "question": {"en": "Name the siblings of Guru Arjan Dev Ji."},
+          "options": {
+            "a": {"en": "Prithi Chand, Mahadev Ji"},
+            "b": {"en": "Bebe Nanaki Ji"},
+            "c": {"en": "None"},
+            "d": {"en": "Bibi Bhani Ji"}
+          },
+          "correct_option": "a",
+          "answer_text": {"en": "Prithi Chand, Mahadev Ji"}
+        },
+        {
+          "number": 10,
+          "question": {"en": "Who was the father of Guru Hargobind Sahib Ji?"},
+          "options": {
+            "a": {"en": "Guru Arjan Dev Ji"},
+            "b": {"en": "Mehta Kalu Ji"},
+            "c": {"en": "Hari Das Ji"},
+            "d": {"en": "Baba Pheru Mal Ji"}
+          },
+          "correct_option": "a",
+          "answer_text": {"en": "Guru Arjan Dev Ji"}
+        },
+        {
+          "number": 11,
+          "question": {"en": "Who was the mother of Guru Hargobind Sahib Ji?"},
+          "options": {
+            "a": {"en": "Mata Ganga Ji"},
+            "b": {"en": "Mata Tripta Ji"},
+            "c": {"en": "Mata Daya Devi Ji"},
+            "d": {"en": "Mata Gujri Ji"}
+          },
+          "correct_option": "a",
+          "answer_text": {"en": "Mata Ganga Ji"}
+        },
+        {
+          "number": 12,
+          "question": {"en": "Name the siblings of Guru Tegh Bahadur Ji."},
+          "options": {
+            "a": {"en": "Baba Gurditta, Suraj Mal, Ani Rai, Atal Rai, Bibi Viro"},
+            "b": {"en": "Prithi Chand, Mahadev Ji"},
+            "c": {"en": "None"},
+            "d": {"en": "Bebe Nanaki Ji"}
+          },
+          "correct_option": "a",
+          "answer_text": {"en": "Baba Gurditta, Suraj Mal, Ani Rai, Atal Rai, Bibi Viro"}
+        },
+        {
+          "number": 13,
+          "question": {"en": "Who was the father of Guru Gobind Singh Ji?"},
+          "options": {
+            "a": {"en": "Guru Tegh Bahadur Ji"},
+            "b": {"en": "Guru Arjan Dev Ji"},
+            "c": {"en": "Mehta Kalu Ji"},
+            "d": {"en": "Hari Das Ji"}
+          },
+          "correct_option": "a",
+          "answer_text": {"en": "Guru Tegh Bahadur Ji"}
+        },
+        {
+          "number": 14,
+          "question": {"en": "Who was the mother of Guru Gobind Singh Ji?"},
+          "options": {
+            "a": {"en": "Mata Gujri Ji"},
+            "b": {"en": "Mata Tripta Ji"},
+            "c": {"en": "Mata Daya Devi Ji"},
+            "d": {"en": "Mata Ramo Ji"}
+          },
+          "correct_option": "a",
+          "answer_text": {"en": "Mata Gujri Ji"}
+        },
+        {
+          "number": 15,
+          "question": {"en": "Who was the father of Guru Har Rai Ji?"},
+          "options": {
+            "a": {"en": "Baba Gurditta"},
+            "b": {"en": "Guru Hargobind Sahib Ji"},
+            "c": {"en": "Guru Arjan Dev Ji"},
+            "d": {"en": "Mehta Kalu Ji"}
+          },
+          "correct_option": "a",
+          "answer_text": {"en": "Baba Gurditta"}
+        },
+        {
+          "number": 16,
+          "question": {"en": "Who was the mother of Guru Har Rai Ji?"},
+          "options": {
+            "a": {"en": "Mata Nihal Kaur"},
+            "b": {"en": "Mata Gujri Ji"},
+            "c": {"en": "Mata Daya Devi Ji"},
+            "d": {"en": "Mata Tripta Ji"}
+          },
+          "correct_option": "a",
+          "answer_text": {"en": "Mata Nihal Kaur"}
+        },
+        {
+          "number": 17,
+          "question": {"en": "Who was the father of Guru Har Krishan Ji?"},
+          "options": {
+            "a": {"en": "Guru Har Rai Ji"},
+            "b": {"en": "Baba Gurditta"},
+            "c": {"en": "Guru Hargobind Sahib Ji"},
+            "d": {"en": "Guru Tegh Bahadur Ji"}
+          },
+          "correct_option": "a",
+          "answer_text": {"en": "Guru Har Rai Ji"}
+        },
+        {
+          "number": 18,
+          "question": {"en": "Who was the mother of Guru Har Krishan Ji?"},
+          "options": {
+            "a": {"en": "Mata Krishen Devi"},
+            "b": {"en": "Mata Gujri Ji"},
+            "c": {"en": "Mata Nihal Kaur"},
+            "d": {"en": "Mata Tripta Ji"}
+          },
+          "correct_option": "a",
+          "answer_text": {"en": "Mata Krishen Devi"}
+        }
+      ]
+    },
+    {
+      "id": "spouse_and_children",
+      "title": "Spouse and Children",
+      "questions": [
+        {
+          "number": 1,
+          "question": {"en": "Who was the spouse of Guru Nanak Dev Ji?"},
+          "options": {
+            "a": {"en": "Mata Sulakhani Ji"},
+            "b": {"en": "Mata Khivi Ji"},
+            "c": {"en": "Mansa Devi Ji"},
+            "d": {"en": "Bibi Bhani Ji"}
+          },
+          "correct_option": "a",
+          "answer_text": {"en": "Mata Sulakhani Ji"}
+        },
+        {
+          "number": 2,
+          "question": {"en": "Name the children of Guru Nanak Dev Ji."},
+          "options": {
+            "a": {"en": "Sri Chand Ji, Lakhmi Das Ji"},
+            "b": {"en": "Dasu, Datu, Bibi Amro, Bibi Anokhi"},
+            "c": {"en": "Mohan, Mohri, Bibi Bhani, Dani"},
+            "d": {"en": "Ajit Singh, Jujhar Singh, Zorawar Singh, Fateh Singh"}
+          },
+          "correct_option": "a",
+          "answer_text": {"en": "Sri Chand Ji, Lakhmi Das Ji"}
+        },
+        {
+          "number": 3,
+          "question": {"en": "Who was the spouse of Guru Angad Dev Ji?"},
+          "options": {
+            "a": {"en": "Mata Khivi Ji"},
+            "b": {"en": "Mata Sulakhani Ji"},
+            "c": {"en": "Mansa Devi Ji"},
+            "d": {"en": "Mata Gujri Ji"}
+          },
+          "correct_option": "a",
+          "answer_text": {"en": "Mata Khivi Ji"}
+        },
+        {
+          "number": 4,
+          "question": {"en": "Name the children of Guru Angad Dev Ji."},
+          "options": {
+            "a": {"en": "Dasu, Datu, Bibi Amro, Bibi Anokhi"},
+            "b": {"en": "Sri Chand Ji, Lakhmi Das Ji"},
+            "c": {"en": "Mohan, Mohri, Bibi Bhani, Dani"},
+            "d": {"en": "Ajit Singh, Jujhar Singh, Zorawar Singh, Fateh Singh"}
+          },
+          "correct_option": "a",
+          "answer_text": {"en": "Dasu, Datu, Bibi Amro, Bibi Anokhi"}
+        },
+        {
+          "number": 5,
+          "question": {"en": "Who was the spouse of Guru Amar Das Ji?"},
+          "options": {
+            "a": {"en": "Mansa Devi Ji"},
+            "b": {"en": "Mata Khivi Ji"},
+            "c": {"en": "Bibi Bhani Ji"},
+            "d": {"en": "Mata Gujri Ji"}
+          },
+          "correct_option": "a",
+          "answer_text": {"en": "Mansa Devi Ji"}
+        },
+        {
+          "number": 6,
+          "question": {"en": "Name the children of Guru Amar Das Ji."},
+          "options": {
+            "a": {"en": "Mohan, Mohri, Bibi Bhani, Dani"},
+            "b": {"en": "Dasu, Datu, Bibi Amro, Bibi Anokhi"},
+            "c": {"en": "Sri Chand Ji, Lakhmi Das Ji"},
+            "d": {"en": "Ajit Singh, Jujhar Singh, Zorawar Singh, Fateh Singh"}
+          },
+          "correct_option": "a",
+          "answer_text": {"en": "Mohan, Mohri, Bibi Bhani, Dani"}
+        },
+        {
+          "number": 7,
+          "question": {"en": "Who was the spouse of Guru Ramdas Ji?"},
+          "options": {
+            "a": {"en": "Bibi Bhani Ji"},
+            "b": {"en": "Mansa Devi Ji"},
+            "c": {"en": "Mata Khivi Ji"},
+            "d": {"en": "Mata Gujri Ji"}
+          },
+          "correct_option": "a",
+          "answer_text": {"en": "Bibi Bhani Ji"}
+        },
+        {
+          "number": 8,
+          "question": {"en": "Name the children of Guru Ramdas Ji."},
+          "options": {
+            "a": {"en": "Prithi Chand, Mahadev, Guru Arjan"},
+            "b": {"en": "Mohan, Mohri, Bibi Bhani, Dani"},
+            "c": {"en": "Dasu, Datu, Bibi Amro, Bibi Anokhi"},
+            "d": {"en": "Ajit Singh, Jujhar Singh, Zorawar Singh, Fateh Singh"}
+          },
+          "correct_option": "a",
+          "answer_text": {"en": "Prithi Chand, Mahadev, Guru Arjan"}
+        },
+        {
+          "number": 9,
+          "question": {"en": "Who was the spouse of Guru Arjan Dev Ji?"},
+          "options": {
+            "a": {"en": "Mata Ganga Ji"},
+            "b": {"en": "Bibi Bhani Ji"},
+            "c": {"en": "Mansa Devi Ji"},
+            "d": {"en": "Mata Gujri Ji"}
+          },
+          "correct_option": "a",
+          "answer_text": {"en": "Mata Ganga Ji"}
+        },
+        {
+          "number": 10,
+          "question": {"en": "Name the children of Guru Arjan Dev Ji."},
+          "options": {
+            "a": {"en": "Guru Hargobind"},
+            "b": {"en": "Prithi Chand, Mahadev, Guru Arjan"},
+            "c": {"en": "Ajit Singh, Jujhar Singh, Zorawar Singh, Fateh Singh"},
+            "d": {"en": "Sri Chand Ji, Lakhmi Das Ji"}
+          },
+          "correct_option": "a",
+          "answer_text": {"en": "Guru Hargobind"}
+        },
+        {
+          "number": 11,
+          "question": {"en": "Who were the spouses of Guru Hargobind Sahib Ji?"},
+          "options": {
+            "a": {"en": "Mata Damodari, Mata Nanaki, Mata Marvahi, Mata Kaulan"},
+            "b": {"en": "Mata Khivi Ji, Mansa Devi Ji, Mata Gujri Ji, Mata Sahib Kaur"},
+            "c": {"en": "Bibi Bhani Ji, Mata Ganga Ji, Mata Gujri Ji, Mata Sundari"},
+            "d": {"en": "Mata Tripta Ji, Mata Ramo Ji, Mata Daya Devi Ji, Mata Gujri Ji"}
+          },
+          "correct_option": "a",
+          "answer_text": {"en": "Mata Damodari, Mata Nanaki, Mata Marvahi, Mata Kaulan"}
+        },
+        {
+          "number": 12,
+          "question": {"en": "Name the children of Guru Hargobind Sahib Ji."},
+          "options": {
+            "a": {"en": "Baba Gurditta, Suraj Mal, Ani Rai, Atal Rai, Guru Tegh Bahadur, Bibi Viro"},
+            "b": {"en": "Guru Hargobind"},
+            "c": {"en": "Ajit Singh, Jujhar Singh, Zorawar Singh, Fateh Singh"},
+            "d": {"en": "Sri Chand Ji, Lakhmi Das Ji"}
+          },
+          "correct_option": "a",
+          "answer_text": {"en": "Baba Gurditta, Suraj Mal, Ani Rai, Atal Rai, Guru Tegh Bahadur, Bibi Viro"}
+        },
+        {
+          "number": 13,
+          "question": {"en": "Who was the spouse of Guru Tegh Bahadur Ji?"},
+          "options": {
+            "a": {"en": "Mata Gujri Ji"},
+            "b": {"en": "Mata Khivi Ji"},
+            "c": {"en": "Mansa Devi Ji"},
+            "d": {"en": "Bibi Bhani Ji"}
+          },
+          "correct_option": "a",
+          "answer_text": {"en": "Mata Gujri Ji"}
+        },
+        {
+          "number": 14,
+          "question": {"en": "Name the children of Guru Tegh Bahadur Ji."},
+          "options": {
+            "a": {"en": "Guru Gobind Singh Ji"},
+            "b": {"en": "Guru Hargobind"},
+            "c": {"en": "Ajit Singh, Jujhar Singh, Zorawar Singh, Fateh Singh"},
+            "d": {"en": "Sri Chand Ji, Lakhmi Das Ji"}
+          },
+          "correct_option": "a",
+          "answer_text": {"en": "Guru Gobind Singh Ji"}
+        },
+        {
+          "number": 15,
+          "question": {"en": "Who were the spouses of Guru Gobind Singh Ji?"},
+          "options": {
+            "a": {"en": "Mata Jito, Mata Sundari, Mata Sahib Kaur"},
+            "b": {"en": "Mata Khivi Ji, Mansa Devi Ji, Mata Gujri Ji, Mata Sahib Kaur"},
+            "c": {"en": "Bibi Bhani Ji, Mata Ganga Ji, Mata Gujri Ji, Mata Sundari"},
+            "d": {"en": "Mata Tripta Ji, Mata Ramo Ji, Mata Daya Devi Ji, Mata Gujri Ji"}
+          },
+          "correct_option": "a",
+          "answer_text": {"en": "Mata Jito, Mata Sundari, Mata Sahib Kaur"}
+        },
+        {
+          "number": 16,
+          "question": {"en": "Name the children of Guru Gobind Singh Ji."},
+          "options": {
+            "a": {"en": "Ajit Singh, Jujhar Singh, Zorawar Singh, Fateh Singh"},
+            "b": {"en": "Guru Hargobind"},
+            "c": {"en": "Sri Chand Ji, Lakhmi Das Ji"},
+            "d": {"en": "Dasu, Datu, Bibi Amro, Bibi Anokhi"}
+          },
+          "correct_option": "a",
+          "answer_text": {"en": "Ajit Singh, Jujhar Singh, Zorawar Singh, Fateh Singh"}
+        },
+        {
+          "number": 17,
+          "question": {"en": "Who was the youngest son of Guru Gobind Singh Ji?"},
+          "options": {
+            "a": {"en": "Fateh Singh"},
+            "b": {"en": "Ajit Singh"},
+            "c": {"en": "Jujhar Singh"},
+            "d": {"en": "Zorawar Singh"}
+          },
+          "correct_option": "a",
+          "answer_text": {"en": "Fateh Singh"}
+        },
+        {
+          "number": 18,
+          "question": {"en": "Who was the spouse of Guru Har Rai Ji?"},
+          "options": {
+            "a": {"en": "Mata Krishen Devi"},
+            "b": {"en": "Mata Gujri Ji"},
+            "c": {"en": "Mata Nihal Kaur"},
+            "d": {"en": "Mata Daya Devi Ji"}
+          },
+          "correct_option": "a",
+          "answer_text": {"en": "Mata Krishen Devi"}
+        },
+        {
+          "number": 19,
+          "question": {"en": "Who was the only child of Guru Tegh Bahadur Ji?"},
+          "options": {
+            "a": {"en": "Guru Gobind Singh Ji"},
+            "b": {"en": "Ajit Singh"},
+            "c": {"en": "Guru Hargobind"},
+            "d": {"en": "Sri Chand Ji"}
+          },
+          "correct_option": "a",
+          "answer_text": {"en": "Guru Gobind Singh Ji"}
+        },
+        {
+          "number": 20,
+          "question": {"en": "Who was the spouse of Guru Har Krishan Ji?"},
+          "options": {
+            "a": {"en": "None"},
+            "b": {"en": "Mata Krishen Devi"},
+            "c": {"en": "Mata Nihal Kaur"},
+            "d": {"en": "Mata Gujri Ji"}
+          },
+          "correct_option": "a",
+          "answer_text": {"en": "None"}
+        }
+      ]
+    },
+    {
+      "id": "gurgaddi_sequence",
+      "title": "Gurgaddi Sequence",
+      "questions": [
+        {
+          "number": 1,
+          "question": {"en": "Who was the first Sikh Guru?"},
+          "options": {
+            "a": {"en": "Guru Nanak Dev Ji"},
+            "b": {"en": "Guru Angad Dev Ji"},
+            "c": {"en": "Guru Amar Das Ji"},
+            "d": {"en": "Guru Gobind Singh Ji"}
+          },
+          "correct_option": "a",
+          "answer_text": {"en": "Guru Nanak Dev Ji"}
+        },
+        {
+          "number": 2,
+          "question": {"en": "Who succeeded Guru Nanak Dev Ji as Guru?"},
+          "options": {
+            "a": {"en": "Guru Angad Dev Ji"},
+            "b": {"en": "Guru Amar Das Ji"},
+            "c": {"en": "Guru Ramdas Ji"},
+            "d": {"en": "Guru Arjan Dev Ji"}
+          },
+          "correct_option": "a",
+          "answer_text": {"en": "Guru Angad Dev Ji"}
+        },
+        {
+          "number": 3,
+          "question": {"en": "Who was the Guru after Guru Angad Dev Ji?"},
+          "options": {
+            "a": {"en": "Guru Amar Das Ji"},
+            "b": {"en": "Guru Ramdas Ji"},
+            "c": {"en": "Guru Arjan Dev Ji"},
+            "d": {"en": "Guru Hargobind Sahib Ji"}
+          },
+          "correct_option": "a",
+          "answer_text": {"en": "Guru Amar Das Ji"}
+        },
+        {
+          "number": 4,
+          "question": {"en": "Who succeeded Guru Amar Das Ji?"},
+          "options": {
+            "a": {"en": "Guru Ramdas Ji"},
+            "b": {"en": "Guru Arjan Dev Ji"},
+            "c": {"en": "Guru Hargobind Sahib Ji"},
+            "d": {"en": "Guru Gobind Singh Ji"}
+          },
+          "correct_option": "a",
+          "answer_text": {"en": "Guru Ramdas Ji"}
+        },
+        {
+          "number": 5,
+          "question": {"en": "Who was the Guru after Guru Ramdas Ji?"},
+          "options": {
+            "a": {"en": "Guru Arjan Dev Ji"},
+            "b": {"en": "Guru Hargobind Sahib Ji"},
+            "c": {"en": "Guru Har Rai Ji"},
+            "d": {"en": "Guru Tegh Bahadur Ji"}
+          },
+          "correct_option": "a",
+          "answer_text": {"en": "Guru Arjan Dev Ji"}
+        },
+        {
+          "number": 6,
+          "question": {"en": "Who succeeded Guru Arjan Dev Ji?"},
+          "options": {
+            "a": {"en": "Guru Hargobind Sahib Ji"},
+            "b": {"en": "Guru Har Rai Ji"},
+            "c": {"en": "Guru Har Krishan Ji"},
+            "d": {"en": "Guru Tegh Bahadur Ji"}
+          },
+          "correct_option": "a",
+          "answer_text": {"en": "Guru Hargobind Sahib Ji"}
+        },
+        {
+          "number": 7,
+          "question": {"en": "Who was the Guru after Guru Hargobind Sahib Ji?"},
+          "options": {
+            "a": {"en": "Guru Har Rai Ji"},
+            "b": {"en": "Guru Har Krishan Ji"},
+            "c": {"en": "Guru Tegh Bahadur Ji"},
+            "d": {"en": "Guru Gobind Singh Ji"}
+          },
+          "correct_option": "a",
+          "answer_text": {"en": "Guru Har Rai Ji"}
+        },
+        {
+          "number": 8,
+          "question": {"en": "Who succeeded Guru Har Rai Ji?"},
+          "options": {
+            "a": {"en": "Guru Har Krishan Ji"},
+            "b": {"en": "Guru Tegh Bahadur Ji"},
+            "c": {"en": "Guru Gobind Singh Ji"},
+            "d": {"en": "Guru Granth Sahib Ji"}
+          },
+          "correct_option": "a",
+          "answer_text": {"en": "Guru Har Krishan Ji"}
+        },
+        {
+          "number": 9,
+          "question": {"en": "Who was the Guru after Guru Har Krishan Ji?"},
+          "options": {
+            "a": {"en": "Guru Tegh Bahadur Ji"},
+            "b": {"en": "Guru Gobind Singh Ji"},
+            "c": {"en": "Guru Granth Sahib Ji"},
+            "d": {"en": "Guru Nanak Dev Ji"}
+          },
+          "correct_option": "a",
+          "answer_text": {"en": "Guru Tegh Bahadur Ji"}
+        },
+        {
+          "number": 10,
+          "question": {"en": "Who succeeded Guru Tegh Bahadur Ji?"},
+          "options": {
+            "a": {"en": "Guru Gobind Singh Ji"},
+            "b": {"en": "Guru Granth Sahib Ji"},
+            "c": {"en": "Guru Nanak Dev Ji"},
+            "d": {"en": "Guru Amar Das Ji"}
+          },
+          "correct_option": "a",
+          "answer_text": {"en": "Guru Gobind Singh Ji"}
+        },
+        {
+          "number": 11,
+          "question": {"en": "Who was the last human Sikh Guru?"},
+          "options": {
+            "a": {"en": "Guru Gobind Singh Ji"},
+            "b": {"en": "Guru Granth Sahib Ji"},
+            "c": {"en": "Guru Nanak Dev Ji"},
+            "d": {"en": "Guru Angad Dev Ji"}
+          },
+          "correct_option": "a",
+          "answer_text": {"en": "Guru Gobind Singh Ji"}
+        },
+        {
+          "number": 12,
+          "question": {"en": "Who is the eternal Guru of the Sikhs after Guru Gobind Singh Ji?"},
+          "options": {
+            "a": {"en": "Guru Granth Sahib Ji"},
+            "b": {"en": "Guru Gobind Singh Ji"},
+            "c": {"en": "Guru Nanak Dev Ji"},
+            "d": {"en": "Guru Angad Dev Ji"}
+          },
+          "correct_option": "a",
+          "answer_text": {"en": "Guru Granth Sahib Ji"}
+        },
+        {
+          "number": 13,
+          "question": {"en": "Who was the Guru after Guru Har Krishan Ji?"},
+          "options": {
+            "a": {"en": "Guru Tegh Bahadur Ji"},
+            "b": {"en": "Guru Gobind Singh Ji"},
+            "c": {"en": "Guru Granth Sahib Ji"},
+            "d": {"en": "Guru Nanak Dev Ji"}
+          },
+          "correct_option": "a",
+          "answer_text": {"en": "Guru Tegh Bahadur Ji"}
+        },
+        {
+          "number": 14,
+          "question": {"en": "Who was the Guru after Guru Har Rai Ji?"},
+          "options": {
+            "a": {"en": "Guru Har Krishan Ji"},
+            "b": {"en": "Guru Tegh Bahadur Ji"},
+            "c": {"en": "Guru Gobind Singh Ji"},
+            "d": {"en": "Guru Granth Sahib Ji"}
+          },
+          "correct_option": "a",
+          "answer_text": {"en": "Guru Har Krishan Ji"}
+        },
+        {
+          "number": 15,
+          "question": {"en": "Who was the Guru after Guru Tegh Bahadur Ji?"},
+          "options": {
+            "a": {"en": "Guru Gobind Singh Ji"},
+            "b": {"en": "Guru Granth Sahib Ji"},
+            "c": {"en": "Guru Nanak Dev Ji"},
+            "d": {"en": "Guru Amar Das Ji"}
+          },
+          "correct_option": "a",
+          "answer_text": {"en": "Guru Gobind Singh Ji"}
+        },
+        {
+          "number": 16,
+          "question": {"en": "Who was the Guru after Guru Gobind Singh Ji?"},
+          "options": {
+            "a": {"en": "Guru Granth Sahib Ji"},
+            "b": {"en": "Guru Nanak Dev Ji"},
+            "c": {"en": "Guru Angad Dev Ji"},
+            "d": {"en": "Guru Amar Das Ji"}
+          },
+          "correct_option": "a",
+          "answer_text": {"en": "Guru Granth Sahib Ji"}
+        }
+      ]
+    }
+  ]
+}

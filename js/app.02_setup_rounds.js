@@ -97,6 +97,13 @@
   // Bank loading
   // =========================
   const DEFAULT_BANK_URL = "./Question_Bank_Sikhi_quiz.bilingual.en-pa.json";
+  const DEFAULT_BANK_URL_FAMILY_TREE = "./Question_Bank_Sikh_Gurus_Family_Tree.en.json";
+
+  function getSelectedDefaultBankUrl() {
+    const sel = document.getElementById("defaultBankSelect");
+    const v = sel && typeof sel.value === "string" ? sel.value.trim() : "";
+    return v || DEFAULT_BANK_URL;
+  }
 
   async function loadBankFromPicker() {
     const file = $("#bankFile").files?.[0];
@@ -133,7 +140,8 @@
     }
 
     try {
-      const res = await fetch(DEFAULT_BANK_URL, { cache: "no-cache" });
+      const url = getSelectedDefaultBankUrl();
+      const res = await fetch(url, { cache: "no-cache" });
       if (!res.ok) throw new Error(`HTTP ${res.status}`);
       const text = await res.text();
       const json = JSON.parse(text);

@@ -32,7 +32,7 @@ body{
   background: rgba(246,247,251,.85);
   border-bottom:1px solid var(--line);
 }
-.wrap{max-width:1400px; margin:0 auto; padding:16px}
+.wrap{max-width:1400px; margin:0 auto; padding:12px}
 .main{max-width:1400px; margin:0 auto; padding:18px 16px 40px}
 
 .titlebar{display:flex; gap:12px; align-items:center; justify-content:space-between; flex-wrap:wrap}
@@ -42,6 +42,23 @@ body{
   background: linear-gradient(135deg, rgba(43,108,255,.22), rgba(18,161,80,.18));
   border:1px solid rgba(43,108,255,.25);
   box-shadow: 0 10px 26px rgba(10,20,50,.08);
+  position:relative;
+  display:inline-block;
+  color: var(--text);
+}
+
+/* Hamburger icon inside the logo */
+.logo::before{
+  content:"";
+  position:absolute;
+  left:10px;
+  top:12px;
+  width:18px;
+  height:2px;
+  background: currentColor;
+  border-radius: 2px;
+  box-shadow: 0 6px 0 currentColor, 0 12px 0 currentColor;
+  opacity:.78;
 }
 
 h1{font-size:28px;margin:0; letter-spacing:.2px}
@@ -69,6 +86,91 @@ h1{font-size:28px;margin:0; letter-spacing:.2px}
 .dot.no{background:var(--bad)}
 
 .tabs{display:flex; gap:8px; flex-wrap:wrap; margin-top:12px}
+
+/* Header navigation row: section tabs */
+.navRow{display:flex; gap:10px; align-items:center; justify-content:flex-start; flex-wrap:wrap; margin-top:10px}
+.navRow .tabs{margin-top:0}
+
+/* App menu (logo dropdown) */
+.appMenu{position:relative; display:inline-block}
+.appMenu > summary{list-style:none}
+.appMenu > summary::-webkit-details-marker{display:none}
+
+.appMenuBtn{
+  cursor:pointer;
+  border:0;
+  background:transparent;
+  padding:0;
+  border-radius:12px;
+  display:inline-flex;
+  align-items:center;
+}
+.appMenuBtn:focus-visible{outline:3px solid rgba(43,108,255,.35); outline-offset:2px}
+
+.appMenuPanel{
+  position:absolute;
+  left:0;
+  top: 46px;
+  min-width: 210px;
+  z-index: 50;
+  border:1px solid var(--line);
+  background: rgba(255,255,255,.98);
+  box-shadow: var(--shadow);
+  border-radius: 14px;
+  padding: 8px;
+}
+.appMenuPanel a{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  padding:10px 12px;
+  border-radius: 12px;
+  text-decoration:none;
+  color: var(--text);
+  font-size: 15px;
+  font-weight: 750;
+}
+.appMenuPanel a:hover{background: rgba(43,108,255,.08)}
+.appMenuPanel a[aria-current="page"]{background: rgba(43,108,255,.12)}
+
+/* App menu group (hover-open section, e.g. Downloads) */
+.appMenuGroup{display:block; margin-top:6px}
+.appMenuGroupBtn{
+  cursor:pointer;
+  width:100%;
+  text-align:left;
+  border:0;
+  background:transparent;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:10px 12px;
+  border-radius: 12px;
+  color: var(--text);
+  font-size: 15px;
+  font-weight: 750;
+}
+.appMenuGroupBtn:hover{background: rgba(43,108,255,.08)}
+.appMenuGroupBtn::after{content:"▸"; opacity:.7; font-size: 14px}
+.appMenuGroup:hover > .appMenuGroupBtn,
+.appMenuGroup:focus-within > .appMenuGroupBtn{background: rgba(43,108,255,.10)}
+
+.appMenuGroupPanel{
+  display:none;
+  padding: 4px 0 2px 12px;
+}
+.appMenuGroup:hover > .appMenuGroupPanel,
+.appMenuGroup:focus-within > .appMenuGroupPanel{display:block}
+.appMenuGroupPanel a{
+  font-weight: 650;
+  font-size: 13px;
+  padding: 8px 12px;
+}
+
+@media (max-width: 740px){
+  .navRow{gap:8px}
+  .appMenuPanel{left:0}
+}
 .tab{
   cursor:pointer;
   border:1px solid var(--line);
@@ -87,6 +189,24 @@ h1{font-size:28px;margin:0; letter-spacing:.2px}
   color:var(--text);
   border-color: rgba(43,108,255,.35);
 }
+
+/* Slim top ribbon controls (header only) */
+.header .tab{
+  padding: 7px 10px;
+  font-size: 14px;
+}
+.header .btn{
+  padding: 10px 12px;
+  font-size: 14px;
+}
+
+/* Bank pages override .btn height to 46px; keep header ribbon slim */
+.bankPage .header .btn{
+  height: 34px;
+  padding: 8px 10px;
+  font-size: 14px;
+}
+.bankPage .header .btn.small{height: 30px}
 .hidden {
   display: none !important;
 }
@@ -154,12 +274,12 @@ h1{font-size:28px;margin:0; letter-spacing:.2px}
 }
 
 .bankPage .btn{
-  height:46px;
+  height:40px;
   padding-top:0;
   padding-bottom:0;
 }
 
-.bankPage .btn.small{height:38px}
+.bankPage .btn.small{height:32px}
 
 .bankPage textarea{
   min-height:110px;
@@ -269,9 +389,9 @@ textarea{min-height:120px; font-family:var(--mono); font-size:12px}
   border:2px solid rgba(14,22,51,.16);
   background: rgba(255,255,255,1);
   color:var(--text);
-  padding:14px 16px;
+  padding:12px 14px;
   border-radius: 12px;
-  font-size:16px;
+  font-size:15px;
   font-weight:750;
   transition: transform .05s ease, background .15s ease, border-color .15s ease;
   user-select:none;
@@ -292,7 +412,7 @@ textarea{min-height:120px; font-family:var(--mono); font-size:12px}
 .btn.good{background: linear-gradient(135deg, rgba(18,161,80,.18), rgba(18,161,80,.06)); border-color: rgba(18,161,80,.30)}
 .btn.bad{background: linear-gradient(135deg, rgba(216,52,79,.16), rgba(216,52,79,.06)); border-color: rgba(216,52,79,.30)}
 .btn.warn{background: linear-gradient(135deg, rgba(197,138,0,.16), rgba(197,138,0,.06)); border-color: rgba(197,138,0,.30)}
-.btn.small{padding:10px 12px; border-radius:10px; font-size:14px; font-weight:800}
+.btn.small{padding:9px 10px; border-radius:10px; font-size:13px; font-weight:800}
 .btn:disabled{opacity:.55; cursor:not-allowed}
 
 .muted{color:var(--muted)}

@@ -1,0 +1,58 @@
+1) Strips Match / Re-arrange Board (12 min) — multi‑column
+Your idea: perfect as Round 1.
+
+Put strips in 3 columns: Birth/Prakash, Gurta Gaddi, Joti Jot (mixed).
+Teams must build correct rows for 4–5 Gurus (you choose subset).
+Scoring (max 4):
++1 correct Guru name row
++1 correct Birth date
++1 correct Gurta Gaddi date
++1 correct Joti Jot date
+Then immediate 2–3 min archery.
+2) Half‑Filled Cards (12–15 min)
+Your idea: “complete missing values, then guess missing based on filled values”.
+
+Each team gets 3 cards:
+Card A: Guru name + 2 dates filled, 1 missing
+Card B: Guru name + Father/Mother filled, missing spouse/child
+Card C: Only dates shown → identify Guru
+Scoring (max 4):
++1 per correctly completed card (3)
++1 “explain how you knew” (one sentence, Captain says it)
+Then archery.
+3) Draw a Guru Sahib Ji Card + Draw Fact Cards (12 min)
+Make it fast and theatrical.
+
+Deck 1: Guru cards (names)
+Deck 2: Fact cards: “Birth/Prakash”, “Gurta Gaddi”, “Joti Jot”, “Father”, “Mother”, “Spouse”, “Child”
+A student draws 1 Guru + 2 Fact cards and must say both facts correctly.
+Scoring (max 4):
++1 per correct fact (up to 3)
++1 “steal” if another team catches an error and corrects it respectfully
+Then archery.
+4) Computational Questions (15–18 min)
+This is where they get busy (and quieter if timed).
+Give each team the same sheet, 8 questions, 8 minutes solve time.
+
+Good question patterns (from your list), with quick-check rules:
+
+Born X years ago: use year only: 2025 − birth_year
+Gurta Gaddi X years ago: 2025 − gurgaddi_year
+Lived longer: (death_year − birth_year) compare two
+If 2025 − ___ = ____: identify which Guru’s (Birth/Gurta Gaddi/Joti Jot) year matches
+Text search: “Mother name contains ‘Devi’ ” (or “Mata” / “Kaur”)
+Scoring (max 4):
+
++1 for 2 correct
++2 for 5 correct
++3 for 7 correct
++4 for all 8 correct
+Then archery.
+5) Final Boss (10–12 min): “Build the full chain”
+On the board: blank chain boxes (11 including Sri Guru Granth Sahib Ji).
+Teams race to fill the correct order + one date per Guru (you pick: Gurta Gaddi year).
+Scoring (max 6, last big payout):
++3 correct full order
++2 correct Gurta Gaddi years for at least 8 entries
++1 best teamwork/quiet discipline (your judgement)
+Final archery showdown with all saved tokens.

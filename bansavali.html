@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Sikh Guru Sahibaan Bansavali</title>
+  <link rel="stylesheet" href="./bansavali.css" />
+</head>
+<body>
+  <div class="header">
+    <div class="wrap">
+      <div class="titlebar">
+        <div class="brand">
+          <details class="appMenu">
+            <summary class="appMenuBtn" aria-label="Open pages menu">
+              <span class="logo" aria-hidden="true"></span>
+            </summary>
+            <div class="appMenuPanel" role="menu" aria-label="Pages">
+              <a role="menuitem" href="index.html">Quiz Runner</a>
+              <a role="menuitem" href="bank_read.html">Quiz Bank Read</a>
+              <a role="menuitem" href="bank_edit.html">Quiz Bank Edit</a>
+              <a role="menuitem" aria-current="page" href="bansavali.html">Bansavali</a>
+
+              <div class="appMenuGroup" role="none">
+                <button class="appMenuGroupBtn" type="button" aria-haspopup="true">Download</button>
+                <div class="appMenuGroupPanel" role="menu" aria-label="Download">
+                  <a role="menuitem" href="Question_Bank_Sikhi_quiz.bilingual.en-pa.json" download target="_blank" rel="noopener">Quiz Bank: Sikhism Knowledge (Bilingual)</a>
+                  <a role="menuitem" href="Question_Bank_Sikh_Gurus_Family_Tree.en.json" download target="_blank" rel="noopener">Quiz Bank: Sikh Gurus Family Tree (English)</a>
+                </div>
+              </div>
+            </div>
+          </details>
+          <div>
+            <h1>Sikh Guru Sahibaan Bansavali</h1>
+            <div class="sub">Reveal facts gradually: sequence → dates → family. Use toggles to hide/show.</div>
+          </div>
+        </div>
+
+        <div class="tabs" role="tablist" aria-label="Views">
+          <button class="btn" id="tabTree" type="button" role="tab" aria-selected="true">Step-by-step</button>
+          <button class="btn" id="tabAll" type="button" role="tab" aria-selected="false">All Guru Sahib</button>
+          <button class="btn" id="tabTimeline" type="button" role="tab" aria-selected="false">Timeline</button>
+        </div>
+
+      </div>
+
+      <div class="toggles" id="toggles" style="margin-top:10px">
+        <div id="treeControls" class="treeControls" aria-label="Presentation controls">
+          <button class="btn" id="prevBtn" type="button">Hide Last</button>
+          <button class="btn primary" id="nextBtn" type="button">Show Next</button>
+
+          <button class="btn" id="prevFactBtn" type="button">&lt;&lt; Fact</button>
+          <button class="btn" id="nextFactBtn" type="button">Fact &gt;&gt;</button>
+
+          <label class="toggle"><input type="checkbox" data-key="birth" checked /> Birth/Prakash</label>
+          <label class="toggle"><input type="checkbox" data-key="birthPlace" checked /> Birth Place</label>
+          <label class="toggle"><input type="checkbox" data-key="gurgaddi" checked /> Gurta Gaddi</label>
+          <label class="toggle"><input type="checkbox" data-key="death" checked /> Joti Jot</label>
+          <label class="toggle"><input type="checkbox" data-key="parents" checked /> Parents</label>
+          <label class="toggle"><input type="checkbox" data-key="siblings" checked /> Siblings</label>
+          <label class="toggle"><input type="checkbox" data-key="spouse" checked /> Spouse</label>
+          <label class="toggle"><input type="checkbox" data-key="children" checked /> Children</label>
+        </div>
+
+        <div id="timelineControls" class="treeControls hidden" aria-label="Timeline controls">
+          <button class="btn primary" id="timelinePlayPause" type="button">Play</button>
+          <button class="btn" id="timelinePrevYear" type="button">-</button>
+          <div class="pill" aria-label="Selected year">
+            <span class="mono">Year</span>
+            <span class="mono" id="timelineYearLabel">1460</span>
+          </div>
+          <input id="timelineYear" type="range" min="1460" max="1720" step="1" value="1460" aria-label="Timeline year" />
+          <button class="btn" id="timelineNextYear" type="button">+</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div id="timelineOverlay" class="timelineOverlay hidden" aria-hidden="true">
+    <div id="timelineStack" class="timelineStack" aria-label="Playing events stack"></div>
+  </div>
+
+  <div class="main">
+    <div id="notice" class="notice hidden">
+      Could not load the dataset. If you opened this file directly, please try running a local server from the project folder and open this page via http.
+      <div class="mono" style="margin-top:6px">python -m http.server</div>
+      Then open: <span class="mono">http://localhost:8000/</span>
+    </div>
+
+    <div id="viewTree" class="treeWrap" style="margin-top:12px">
+      <svg id="edges" class="edges" aria-hidden="true"></svg>
+      <div id="treeCanvas" class="treeCanvas" aria-label="Timeline/tree"></div>
+    </div>
+
+    <div id="viewAll" class="allWrap hidden" style="margin-top:12px" aria-label="All Guru Sahib cards">
+      <div id="allCards" class="allCards"></div>
+    </div>
+
+    <div id="viewTimeline" class="allWrap hidden" style="margin-top:12px" aria-label="Timeline">
+      <div id="timelineCanvas" class="timelineCanvas" aria-label="Timeline canvas">
+        <div id="timelineAxis" class="timelineAxis" aria-hidden="true"></div>
+        <div id="timelineLinks" class="timelineLinks" aria-hidden="true"></div>
+        <div id="timelineNow" class="timelineNow hidden" aria-hidden="true"></div>
+        <div id="timelineEvents" class="timelineEvents"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Load dataset as JavaScript (works even when opened directly as file://) -->
+  <script src="./data/sikh_gurus_family_tree.js"></script>
+  <script src="./js/menu.js"></script>
+  <script src="./js/bansavali.js"></script>
+</body>
+</html>

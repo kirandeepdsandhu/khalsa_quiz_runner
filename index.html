@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Sikh Quiz — Quiz Runner</title>
+  <title>Sikhism Knowledge — Quiz Runner</title>
   <link rel="stylesheet" href="./styles.css" />
 </head>
 <body>
@@ -11,9 +11,27 @@
     <div class="wrap">
       <div class="titlebar">
         <div class="brand">
-          <div class="logo" aria-hidden="true"></div>
+          <details class="appMenu">
+            <summary class="appMenuBtn" aria-label="Open pages menu">
+              <span class="logo" aria-hidden="true"></span>
+            </summary>
+            <div class="appMenuPanel" role="menu" aria-label="Pages">
+              <a role="menuitem" aria-current="page" href="index.html">Quiz Runner</a>
+              <a role="menuitem" href="bank_read.html">Quiz Bank Read</a>
+              <a role="menuitem" href="bank_edit.html">Quiz Bank Edit</a>
+              <a role="menuitem" href="bansavali.html">Bansavali</a>
+
+              <div class="appMenuGroup" role="none">
+                <button class="appMenuGroupBtn" type="button" aria-haspopup="true">Download</button>
+                <div class="appMenuGroupPanel" role="menu" aria-label="Download">
+                  <a role="menuitem" href="Question_Bank_Sikhi_quiz.bilingual.en-pa.json" download target="_blank" rel="noopener">Quiz Bank: Sikhism Knowledge (Bilingual)</a>
+                  <a role="menuitem" href="Question_Bank_Sikh_Gurus_Family_Tree.en.json" download target="_blank" rel="noopener">Quiz Bank: Sikh Gurus Family Tree (English)</a>
+                </div>
+              </div>
+            </div>
+          </details>
           <div>
-            <h1>Sikh Quiz — Quiz Runner</h1>
+            <h1>Sikhism Knowledge — Quiz Runner</h1>
             <div class="sub">Local UI • teams • rounds • scoring • backup</div>
           </div>
         </div>
@@ -30,12 +48,14 @@
         </div>
       </div>
 
-      <nav class="tabs" aria-label="Sections">
-        <button class="tab active" data-tab="setup" type="button">Setup</button>
-        <button class="tab" data-tab="quiz" type="button">Quiz</button>
-        <button class="tab" data-tab="scoreboard" type="button">Scoreboard</button>
-        <button class="tab" data-tab="backup" type="button">Backup/Reset</button>
-      </nav>
+      <div class="navRow">
+        <nav class="tabs" aria-label="Sections">
+          <button class="tab active" data-tab="setup" type="button">Setup</button>
+          <button class="tab" data-tab="quiz" type="button">Quiz</button>
+          <button class="tab" data-tab="scoreboard" type="button">Scoreboard</button>
+          <button class="tab" data-tab="backup" type="button">Backup/Reset</button>
+        </nav>
+      </div>
     </div>
   </header>
 
@@ -50,6 +70,10 @@
             <input id="bankFile" type="file" accept="application/json" />
             <button class="btn primary" id="btnLoadBank" type="button">Load</button>
             <button class="btn" id="btnLoadDefaultBank" type="button" title="Load the default bank bundled in this repo">Load default</button>
+            <select id="defaultBankSelect" aria-label="Default bank" title="Default bank">
+              <option value="./Question_Bank_Sikhi_quiz.bilingual.en-pa.json">Sikhism Knowledge (Bilingual)</option>
+              <option value="./Question_Bank_Sikh_Gurus_Family_Tree.en.json">Sikh Gurus Family Tree (English)</option>
+            </select>
           </div>
           <p class="hint">
             Select your JSON file (use the bilingual file like <span class="k">Question_Bank_Sikhi_quiz.v8.corrected.bilingual.en-pa.json</span>).
@@ -389,6 +413,7 @@
   </div>
 
   <script src="./js/app.01_core.js"></script>
+  <script src="./js/menu.js"></script>
   <script src="./js/app.02_setup_rounds.js"></script>
   <script src="./js/app.03_quiz.js"></script>
   <script src="./js/app.04_scoreboard_backup_boot.js"></script>
