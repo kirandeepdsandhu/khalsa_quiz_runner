@@ -5,8 +5,19 @@
     return Array.from(document.querySelectorAll("details.appMenu[open]"));
   }
 
+  function getAllDefaultBankMenus() {
+    return Array.from(document.querySelectorAll("details.defaultBankMenu[open]"));
+  }
+
   function closeAllMenus(exceptEl = null) {
     for (const d of getAllMenus()) {
+      if (exceptEl && d === exceptEl) continue;
+      d.open = false;
+    }
+  }
+
+  function closeAllDefaultBankMenus(exceptEl = null) {
+    for (const d of getAllDefaultBankMenus()) {
       if (exceptEl && d === exceptEl) continue;
       d.open = false;
     }
@@ -15,12 +26,15 @@
   // Close when clicking outside.
   document.addEventListener("click", (e) => {
     const openMenus = getAllMenus();
-    if (openMenus.length === 0) return;
+    const openDefaultMenus = getAllDefaultBankMenus();
+    if (openMenus.length === 0 && openDefaultMenus.length === 0) return;
 
-    const clickedInside = e.target && e.target.closest ? e.target.closest("details.appMenu") : null;
-    if (clickedInside) return;
+    const clickedInsideAppMenu = e.target && e.target.closest ? e.target.closest("details.appMenu") : null;
+    const clickedInsideDefaultMenu = e.target && e.target.closest ? e.target.closest("details.defaultBankMenu") : null;
+    if (clickedInsideAppMenu || clickedInsideDefaultMenu) return;
 
     closeAllMenus();
+    closeAllDefaultBankMenus();
   });
 
   // Close when choosing a menu link.
@@ -36,5 +50,6 @@
   document.addEventListener("keydown", (e) => {
     if (e.key !== "Escape") return;
     closeAllMenus();
+    closeAllDefaultBankMenus();
   });
 })();

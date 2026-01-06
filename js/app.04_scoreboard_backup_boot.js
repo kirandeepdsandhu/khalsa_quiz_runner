@@ -641,8 +641,14 @@
           });
         }
     $("#btnLoadBank").addEventListener("click", loadBankFromPicker);
-    const btnDefaultBank = $("#btnLoadDefaultBank");
-    if (btnDefaultBank) btnDefaultBank.addEventListener("click", loadBankFromDefault);
+        document.querySelectorAll(".defaultBankOption").forEach((btn) => {
+          btn.addEventListener("click", () => {
+            const url = btn.dataset.url || "";
+            const menu = btn.closest && btn.closest("details.defaultBankMenu");
+            if (menu) menu.open = false;
+            loadBankFromDefault(url);
+          });
+        });
 
     $("#btnAddTeam").addEventListener("click", addTeam);
     $("#teamName").addEventListener("keydown", (e) => {

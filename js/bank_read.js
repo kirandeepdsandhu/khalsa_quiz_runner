@@ -8,12 +8,6 @@ let qIdx = 0;
 const DEFAULT_BANK_URL = "./Question_Bank_Sikhi_quiz.bilingual.en-pa.json";
 const DEFAULT_BANK_URL_FAMILY_TREE = "./Question_Bank_Sikh_Gurus_Family_Tree.en.json";
 
-function getSelectedDefaultBankUrl() {
-  const sel = document.getElementById("defaultBankSelect");
-  const v = sel && typeof sel.value === "string" ? sel.value.trim() : "";
-  return v || DEFAULT_BANK_URL;
-}
-
 function applyLoadedBank(json, fileName) {
   validateBankShape(json);
 
@@ -44,7 +38,7 @@ function applyLoadedBank(json, fileName) {
   renderIndex();
 }
 
-async function loadDefaultBank() {
+async function loadDefaultBank(url = "") {
   // On file://, fetch() is typically blocked or behaves inconsistently.
   if (location.protocol === "file:") {
     toast("Default load needs a web server (GitHub Pages / Live Server). Use file picker for local.");
@@ -52,7 +46,7 @@ async function loadDefaultBank() {
   }
 
   try {
-    const url = getSelectedDefaultBankUrl();
+    url = (typeof url === "string" && url.trim()) ? url.trim() : DEFAULT_BANK_URL;
     const res = await fetch(url, { cache: "no-cache" });
     if (!res.ok) throw new Error(`HTTP ${res.status}`);
     const json = await res.json();
@@ -330,8 +324,14 @@ function init() {
   setupTabs();
   setupIndexClicks();
   $("#btnLoadBank").addEventListener("click", loadBankFromFilePicker);
-  const btnDef = document.getElementById("btnLoadDefaultBank");
-  if (btnDef) btnDef.addEventListener("click", loadDefaultBank);
+  document.querySelectorAll(".defaultBankOption").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const url = btn.dataset.url || "";
+      const menu = btn.closest && btn.closest("details.defaultBankMenu");
+      if (menu) menu.open = false;
+      loadDefaultBank(url);
+    });
+  });
 
   $("#sectionSelect").addEventListener("change", onSectionChange);
 

@@ -99,12 +99,6 @@
   const DEFAULT_BANK_URL = "./Question_Bank_Sikhi_quiz.bilingual.en-pa.json";
   const DEFAULT_BANK_URL_FAMILY_TREE = "./Question_Bank_Sikh_Gurus_Family_Tree.en.json";
 
-  function getSelectedDefaultBankUrl() {
-    const sel = document.getElementById("defaultBankSelect");
-    const v = sel && typeof sel.value === "string" ? sel.value.trim() : "";
-    return v || DEFAULT_BANK_URL;
-  }
-
   async function loadBankFromPicker() {
     const file = $("#bankFile").files?.[0];
     if (!file) {
@@ -133,14 +127,14 @@
     }
   }
 
-  async function loadBankFromDefault() {
+  async function loadBankFromDefault(url = "") {
     if (location.protocol === "file:") {
       toast("Default load needs a web server (GitHub Pages / Live Server). Use file picker for local.");
       return;
     }
 
     try {
-      const url = getSelectedDefaultBankUrl();
+      url = (typeof url === "string" && url.trim()) ? url.trim() : DEFAULT_BANK_URL;
       const res = await fetch(url, { cache: "no-cache" });
       if (!res.ok) throw new Error(`HTTP ${res.status}`);
       const text = await res.text();

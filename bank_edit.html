@@ -62,11 +62,13 @@
         <div class="row">
           <input id="bankFile" type="file" accept="application/json" />
           <button class="btn primary" id="btnLoadBank" type="button">Load</button>
-          <button class="btn" id="btnLoadDefaultBank" type="button" title="Load the default bank bundled in this repo">Load default</button>
-          <select id="defaultBankSelect" aria-label="Default bank" title="Default bank">
-            <option value="./Question_Bank_Sikhi_quiz.bilingual.en-pa.json">Sikhism Knowledge (Bilingual)</option>
-            <option value="./Question_Bank_Sikh_Gurus_Family_Tree.en.json">Sikh Gurus Family Tree (English)</option>
-          </select>
+          <details class="defaultBankMenu" id="defaultBankMenu">
+            <summary class="btn" role="button" aria-label="Load default bank">Load default ▾</summary>
+            <div class="defaultBankMenuPanel" role="menu" aria-label="Default banks">
+              <button class="btn small defaultBankOption" type="button" data-url="./Question_Bank_Sikhi_quiz.bilingual.en-pa.json">Sikhism Knowledge (Bilingual)</button>
+              <button class="btn small defaultBankOption" type="button" data-url="./Question_Bank_Sikh_Gurus_Family_Tree.en.json">Sikh Gurus Family Tree (English)</button>
+            </div>
+          </details>
         </div>
 
         <div class="row" style="margin-top:10px">

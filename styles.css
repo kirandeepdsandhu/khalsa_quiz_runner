@@ -118,6 +118,9 @@ h1{font-size:28px;margin:0; letter-spacing:.2px}
   box-shadow: var(--shadow);
   border-radius: 14px;
   padding: 8px;
+  display:flex;
+  flex-direction:column;
+  gap: 2px;
 }
 .appMenuPanel a{
   display:flex;
@@ -149,6 +152,8 @@ h1{font-size:28px;margin:0; letter-spacing:.2px}
   color: var(--text);
   font-size: 15px;
   font-weight: 750;
+  font-family: inherit;
+  line-height: 1.2;
 }
 .appMenuGroupBtn:hover{background: rgba(43,108,255,.08)}
 .appMenuGroupBtn::after{content:"▸"; opacity:.7; font-size: 14px}
@@ -165,6 +170,26 @@ h1{font-size:28px;margin:0; letter-spacing:.2px}
   font-weight: 650;
   font-size: 13px;
   padding: 8px 12px;
+}
+
+/* Default bank dropdown-button */
+.defaultBankMenu{position:relative; display:inline-block}
+.defaultBankMenu > summary{list-style:none}
+.defaultBankMenu > summary::-webkit-details-marker{display:none}
+.defaultBankMenuPanel{
+  position:absolute;
+  left:0;
+  top: 44px;
+  z-index: 20;
+  min-width: 260px;
+  border:1px solid var(--line);
+  background: rgba(255,255,255,.98);
+  box-shadow: var(--shadow);
+  border-radius: 14px;
+  padding: 8px;
+  display:flex;
+  flex-direction:column;
+  gap: 6px;
 }
 
 @media (max-width: 740px){
